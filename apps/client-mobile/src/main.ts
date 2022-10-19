@@ -13,7 +13,6 @@ import './assets/css/mobile/common.scss';
 import './assets/css/team.scss';
 
 import LoadImg from '@/components/common/loadImg.vue';
-import myEmpty from '@/components/common/empty.vue';
 
 import { initSentry } from './plugins/sentry';
 
@@ -23,6 +22,5 @@ app.use(router);
 app.use(i18n);
 app.use(store);
 app.component('load-img', LoadImg);
-app.component('empty', myEmpty);
 app.use(Vant);
 app.mount('#app');

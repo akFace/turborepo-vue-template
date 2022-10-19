@@ -9,6 +9,7 @@
 </template>
 
 <script setup lang="ts">
+import { withDefaults, defineProps } from 'vue';
 import emptyImg from '@/assets/image/empty.svg';
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
