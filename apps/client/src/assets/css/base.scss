@@ -1,0 +1,102 @@
+body,
+ul,
+ol,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+p,
+span,
+tr,
+td,
+input,
+button,
+textarea,
+td,
+th {
+  padding: 0;
+  margin: 0;
+}
+img,
+video {
+  border: 0 none;
+  vertical-align: top;
+}
+ul {
+  padding: 0;
+  list-style: none;
+}
+* {
+  outline: none;
+}
+input,
+textarea {
+  -webkit-appearance: none;
+  appearance: none;
+}
+em,
+strong,
+i {
+  font-style: normal;
+}
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+$bg: #4a5a6c;
+$black: #000000;
+$white: #ffffff;
+
+// font-related
+$base: #1c2438;
+$regular: #495060;
+
+// $first = #99a8b4
+$first: #a5b5c1;
+$secondary: #a5b5c1;
+$font-light: #f7f7f8;
+$font-dark: #76828c;
+
+// border-related
+$border-base: #e7e7e7;
+$border-light: #e9eaec;
+$border-highlight: #55d48b;
+
+// theme-related
+$dark-primary: #2b85e4;
+$primary: #2d8cf0;
+$light-primary: #5cadff;
+
+// $light-primary : #55d48b
+$success: #0ac160;
+$warning: #fa9d3b;
+$danger: #f35f5f; // background-related
+$light-background: #f2f7f7;
+$background: #404953;
+$dark-background: #363e47;
+$deep-background: #303841;
+$background: #404953;
+$background-light: #f5f5f5;
+$background-dark: #363e47;
+$background-deep-dark: #303841;
+
+$height: 80vh;
+$width: 80vw;

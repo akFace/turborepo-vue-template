@@ -1,0 +1,35 @@
+.custom-cursor {
+  cursor: url('../icon/hand_icon.svg'), auto;
+}
+
+.vjs-error-display {
+  display: none !important;
+}
+
+.is-member-tooltip {
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.1);
+  .el-popper__arrow {
+    &::before {
+      background: #ffffff;
+    }
+  }
+}
+
+.blue {
+  color: #1164ff !important;
+}
+.clear {
+  clear: both;
+}
+
+.clearfix {
+  zoom: 1;
+}
+
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both;
+}

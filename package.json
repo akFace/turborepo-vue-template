@@ -1,0 +1,47 @@
+{
+  "name": "live-meeting-root",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "test": "echo ${npm_package_name}",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,vue,md}\"",
+    "prepare": "husky install",
+    "cz": "git cz",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm build && pnpm release:only",
+    "release:only": "changeset publish --registry=https://registry.npmjs.com/",
+    "build:clientPc": "cd apps/client && pnpm run build",
+    "build:clientWap": "cd apps/client-mobile && pnpm run build",
+    "build:admin": "cd apps/admin && pnpm run build"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.22.0",
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
+    "cz-git": "^1.2.2",
+    "eslint": "^8.12.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.7",
+    "prettier": "^2.5.1",
+    "trtc-js-sdk": "^4.12.4",
+    "turbo": "latest"
+  },
+  "engines": {
+    "npm": ">=7.0.0",
+    "node": ">=14.0.0"
+  },
+  "packageManager": "pnpm@6.24.2"
+}

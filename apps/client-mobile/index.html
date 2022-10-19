@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!-- 优先使用Chrome内核 -->
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>模板</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <!--阿里云图标包iconfont-->
+    <link
+      href="//at.alicdn.com/t/font_3413672_j6qs0gdg8in.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://web.sdk.qcloud.com/player/tcplayer/release/v4.5.2/tcplayer.min.css"
+      rel="stylesheet"
+    />
+    <!--如果需要在 Chrome 和 Firefox 等现代浏览器中通过 H5 播放 Webrtc 视频，需要在 tcplayer.vx.x.x.min.js 之前引入 TXLivePlayer-x.x.x.min.js。-->
+    <!--有些浏览器环境不支持 Webrtc，播放器会将 Webrtc 流地址自动转换为 HLS 格式地址，因此快直播场景同样需要引入hls.min.x.xx.xm.js。-->
+    <script src="https://web.sdk.qcloud.com/player/tcplayer/release/v4.5.1/libs/TXLivePlayer-1.2.0.min.js"></script>
+    <!--如果需要在 Chrome 和 Firefox 等现代浏览器中通过 H5 播放 HLS 协议的视频，需要在 tcplayer.vx.x.x.min.js 之前引入 hls.min.x.xx.xm.js。-->
+    <script src="https://web.sdk.qcloud.com/player/tcplayer/release/v4.5.2/libs/hls.min.0.13.2m.js"></script>
+    <!--如果需要在 Chrome 和 Firefox 等现代浏览器中通过 H5 播放 FLV 格式的视频，需要在 tcplayer.vx.x.x.min.js 之前引入 flv.min.x.x.x.js。-->
+    <script src="https://web.sdk.qcloud.com/player/tcplayer/release/v4.5.2/libs/flv.min.1.6.2.js"></script>
+    <!--播放器脚本文件-->
+    <script src="https://web.sdk.qcloud.com/player/tcplayer/release/v4.5.2/tcplayer.v4.5.2.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+    <script>
+      var _showConsole_ = window.location.search.includes('__showConsole__');
+      // 初始化
+      if (_showConsole_) {
+        var bp = document.createElement('script');
+        var s = document.getElementsByTagName('script')[0];
+        bp.src = 'https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js';
+        s.parentNode.insertBefore(bp, s);
+        bp.onload = function () {
+          var vConsole = new VConsole();
+          console.log('vConsole ==>>> Hello world');
+        };
+      }
+    </script>
+  </body>
+</html>
