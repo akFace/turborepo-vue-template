@@ -40,9 +40,14 @@ import {
   IconifyIconOnline,
   FontIcon
 } from "./components/ReIcon";
+import MixTable from "/@/components/table/mix-table.vue";
+import MixTableTitle from "/@/components/table/mix-table-title.vue";
+
 app.component("IconifyIconOffline", IconifyIconOffline);
 app.component("IconifyIconOnline", IconifyIconOnline);
 app.component("FontIcon", FontIcon);
+app.component("MixTable", MixTable);
+app.component("MixTableTitle", MixTableTitle);
 
 getServerConfig(app).then(async config => {
   app.use(router);
