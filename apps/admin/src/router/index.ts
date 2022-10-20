@@ -21,19 +21,16 @@ import {
   formatTwoStageRoutes,
   formatFlatteningRoutes
 } from "./utils";
-import {
-  buildHierarchyTree,
-  openLink,
-  isUrl,
-  storageSession
-} from "@pureadmin/utils";
+import { buildHierarchyTree, openLink, storageSession } from "@pureadmin/utils";
+import { isUrl } from "/@/utils/tool";
 
 import homeRouter from "./modules/home";
 import errorRouter from "./modules/error";
 import remainingRouter from "./modules/remaining";
+import basicRoutes from "./modules/basic";
 
 /** 原始静态路由（未做任何处理） */
-const routes = [homeRouter, errorRouter];
+const routes = [homeRouter, ...basicRoutes, errorRouter];
 
 /** 导出处理后的静态路由（三级及以上的路由全部拍成二级） */
 export const constantRoutes: Array<RouteRecordRaw> = formatTwoStageRoutes(
@@ -50,10 +47,12 @@ export const remainingPaths = Object.keys(remainingRouter).map(v => {
   return remainingRouter[v].path;
 });
 
+const allRoutes = constantRoutes.concat(...(remainingRouter as any));
+
 /** 创建路由实例 */
 export const router: Router = createRouter({
   history: getHistoryMode(),
-  routes: constantRoutes.concat(...(remainingRouter as any)),
+  routes: allRoutes,
   strict: true,
   scrollBehavior(to, from, savedPosition) {
     return new Promise(resolve => {

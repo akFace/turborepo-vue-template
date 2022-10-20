@@ -20,6 +20,7 @@ buttons:
   hscloseAllTabs: 关闭全部标签页
 menus:
   hshome: 首页
+  userManagement: 用户管理
   hslogin: 登录
   hserror: 错误页面
   hsfourZeroFour: "404"
@@ -28,6 +29,7 @@ menus:
   permission: 权限管理
   permissionPage: 页面权限
   permissionButton: 按钮权限
+  charge: 金币充值记录
 status:
   hsLoad: 加载中...
 login:

@@ -4,7 +4,8 @@ import { isEqual } from "lodash-unified";
 import type { StorageConfigs } from "/#/index";
 import { routerArrays } from "/@/layout/types";
 import { multiType, positionType } from "./types";
-import { isUrl, storageLocal } from "@pureadmin/utils";
+import { storageLocal } from "@pureadmin/utils";
+import { isUrl } from "/@/utils/tool";
 
 export const useMultiTagsStore = defineStore({
   id: "pure-multiTags",

@@ -20,6 +20,7 @@ buttons:
   hscloseAllTabs: Close AllTabs
 menus:
   hshome: Home
+  userManagement: 用户管理
   hslogin: Login
   hserror: Error Page
   hsfourZeroFour: "404"
