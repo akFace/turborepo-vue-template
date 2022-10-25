@@ -15,7 +15,7 @@ export default defineConfig({
   },
   base: './',
   server: {
-    port: 9002,
+    port: 8847,
     open: false,
     proxy: {
       '/livefront/': {

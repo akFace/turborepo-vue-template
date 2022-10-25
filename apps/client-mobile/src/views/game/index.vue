@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <h2>首页</h2>
-    <van-button type="primary">主要按钮</van-button>
-  </div>
+  <div>游戏详情</div>
 </template>
 <script lang="ts" setup>
 import { reactive, ref } from 'vue';
