@@ -97,3 +97,18 @@ i {
   background-color: $bgColor;
   color: #fff;
 }
+
+.van-dialog--round-button .van-dialog__content .van-dialog__message {
+  font-size: 20px;
+  color: #fa3860;
+  text-shadow: 0px 2px 0px 0px #6e44b6;
+}
+
+.van-dialog--round-button .van-dialog__header {
+  color: #fff;
+  font-size: 14px;
+}
+.van-dialog--round-button .van-action-bar .van-dialog__confirm {
+  color: #83280e;
+  background: linear-gradient(360deg, #f9b809 0%, #fad302 100%);
+}

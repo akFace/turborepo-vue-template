@@ -3,7 +3,7 @@
     <nav-bar title="推幣機" />
     <div class="box-hd">
       <div class="user-info">
-        <div class="user-head">
+        <div class="user-head" @click="doShowDialog">
           <div class="user-img">
             <img
               src="https://img0.baidu.com/it/u=2703585149,4271457684&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
@@ -58,9 +58,15 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue';
 import navBar from '@/layout/navBar.vue';
-import GameItem from './components/GameItem.vue';
-import ChargePopup from './components/ChargePopup.vue';
+import GameItem from './components/gameItem.vue';
+import ChargePopup from './components/chargePopup.vue';
+import showDialog from '@/components/common/dialog/index';
 const showPopup = ref(true);
+const doShowDialog = () => {
+  showDialog('黑乎乎的的', '这是标题').then(() => {
+    console.log(222222);
+  });
+};
 </script>
 <style lang="scss" scoped>
 .container {

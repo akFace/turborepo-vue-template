@@ -7,11 +7,11 @@ import i18n from '@/i18n';
 import store from '@/stores';
 import Vant from 'vant';
 import 'vant/lib/index.css';
-import './assets/css/vant-theme.scss';
 // 全局CSS
 import './assets/css/base.scss';
 import './assets/css/mobile/common.scss';
 import './assets/css/team.scss';
+import './assets/css/vant-theme.scss';
 
 import LoadImg from '@/components/common/loadImg.vue';
 

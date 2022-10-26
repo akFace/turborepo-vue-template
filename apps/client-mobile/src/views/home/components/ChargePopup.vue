@@ -24,12 +24,33 @@
             {{ tab.name }}
           </div>
         </div>
+        <div class="point-box">
+          <div class="point-num">
+            <div class="point-left">
+              <img src="" alt="" />
+              <span>23423</span>
+            </div>
+            <div class="point-right">
+              <img src="" alt="" />
+              <span>23423</span>
+            </div>
+          </div>
+          <div class="point-list">
+            <PointItem />
+            <PointItem />
+            <PointItem />
+            <PointItem />
+            <PointItem />
+            <PointItem />
+          </div>
+        </div>
       </div>
     </div>
   </van-popup>
 </template>
 <script lang="ts" setup>
 import { reactive, ref, defineEmits, computed } from 'vue';
+import PointItem from './pointItem.vue';
 const props = defineProps({
   show: {
     type: Boolean,
@@ -61,7 +82,7 @@ const change = (tab: any) => {
 </script>
 <style lang="scss" scoped>
 :global(.charge-popup-box) {
-  background-color: transparent;
+  background-color: transparent !important;
 }
 :global(.charge-popup-box .van-icon-close) {
   font-size: 30px;
@@ -74,7 +95,7 @@ const change = (tab: any) => {
     height: 60px;
   }
   .popup-content {
-    background-color: #663dad;
+    background-color: $secBgColor;
     height: calc(100% - 60px);
     border-radius: 8px 8px 0 0;
     overflow: hidden;
@@ -83,17 +104,17 @@ const change = (tab: any) => {
     position: relative;
     display: flex;
     align-items: center;
-    // &::after {
-    //   position: absolute;
-    //   top: 0;
-    //   left: 50%;
-    //   transform: translateX(-50%);
-    //   display: block;
-    //   content: '';
-    //   width: 10px;
-    //   height: 10px;
-    //   background-color: #32146c;
-    // }
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      display: block;
+      content: '';
+      width: 20px;
+      height: 20px;
+      background-color: #32146c;
+    }
     .tab-item {
       position: relative;
       flex: 1;
@@ -103,30 +124,78 @@ const change = (tab: any) => {
       overflow: hidden;
       font-size: 18px;
       &.active {
+        position: relative;
+        z-index: 1;
         color: #ffc53d;
         font-size: 20px;
+        border-top: 1px solid #777;
       }
     }
     .tab-item-1 {
       &.active {
-        background-color: #663dad;
-        border-radius: 0 8px 0 0;
+        background-color: $secBgColor;
+        border-radius: 8px 14px 0 0;
       }
       &.not-active {
         background-color: #32146c;
         border-radius: 0 0 14px 0;
+        border-bottom: 1px solid #777;
       }
     }
     .tab-item-2 {
       &.active {
-        background-color: #663dad;
-        border-radius: 0 8px 0 0;
+        background-color: $secBgColor;
+        border-radius: 14px 8px 0 0;
       }
       &.not-active {
         background-color: #32146c;
         border-radius: 0 0 0 14px;
+        border-bottom: 1px solid #777;
       }
     }
+  }
+  .point-box {
+    overflow-y: auto;
+    height: calc(100% - 40px);
+  }
+  .point-num {
+    margin: 16px;
+    display: flex;
+    align-items: center;
+    height: 36px;
+    background: rgb(50, 20, 108, 0.5);
+    border-radius: 8px;
+    .point-left,
+    .point-right {
+      flex: 1;
+      text-align: center;
+    }
+    .point-left {
+      position: relative;
+      &::after {
+        width: 1px;
+        height: 16px;
+        background: $secBgColor;
+        border-radius: 1px;
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        margin-top: -8px;
+        display: inline-block;
+      }
+    }
+  }
+  .point-list {
+    margin: 16px;
+    background: #773ce7;
+    border-radius: 8px;
+    box-shadow: 0px 1px 3px 0px rgba(255, 255, 255, 0.5) inset;
+    padding: $padding;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-row-gap: 10px;
+    grid-column-gap: 10px;
   }
 }
 </style>
