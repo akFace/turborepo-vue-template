@@ -60,10 +60,16 @@ import { reactive, ref } from 'vue';
 import navBar from '@/layout/navBar.vue';
 import GameItem from './components/gameItem.vue';
 import ChargePopup from './components/chargePopup.vue';
-import showDialog from '@/components/common/dialog/index';
+import { showDialog } from '@/components/common/dialog/index';
 const showPopup = ref(true);
 const doShowDialog = () => {
-  showDialog('黑乎乎的的', '这是标题').then(() => {
+  showDialog(
+    `已兑换出<img style="width: 20px;height: 20px;margin: 0 3px;" src="https://img0.baidu.com/it/u=2703585149,4271457684&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" />1000`,
+    '这是标题',
+    {
+      allowHtml: true,
+    }
+  ).then(() => {
     console.log(222222);
   });
 };

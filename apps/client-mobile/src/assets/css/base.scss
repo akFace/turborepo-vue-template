@@ -92,23 +92,28 @@ i {
   max-width: 750px;
   margin: 0 auto;
   min-height: 100vh;
-  padding-bottom: calc(20px + constant(safe-area-inset-bottom));
-  padding-bottom: calc(20px + env(safe-area-inset-bottom));
   background-color: $bgColor;
   color: #fff;
+  padding-bottom: calc(20px + constant(safe-area-inset-bottom));
+  padding-bottom: calc(20px + env(safe-area-inset-bottom));
 }
 
 .van-dialog--round-button .van-dialog__content .van-dialog__message {
   font-size: 20px;
   color: #fa3860;
-  text-shadow: 0px 2px 0px 0px #6e44b6;
+  text-shadow: 0px 0px 2px #fff;
+  font-weight: 700;
 }
 
 .van-dialog--round-button .van-dialog__header {
   color: #fff;
   font-size: 14px;
 }
-.van-dialog--round-button .van-action-bar .van-dialog__confirm {
+.van-dialog--round-button .van-action-bar .van-dialog__confirm,
+.van-dialog--round-button .van-action-bar .van-dialog__cancel {
+  position: relative;
   color: #83280e;
   background: linear-gradient(360deg, #f9b809 0%, #fad302 100%);
+  box-shadow: 0px 1px 0 0px rgba(255, 255, 255, 0.5) inset,
+    0px -3px 1px 0px #f57813 inset;
 }

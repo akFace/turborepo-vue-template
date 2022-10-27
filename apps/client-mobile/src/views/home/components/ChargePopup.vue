@@ -35,13 +35,19 @@
               <span>23423</span>
             </div>
           </div>
-          <div class="point-list">
+          <div class="point-list" v-if="currentTab.type === 'charge'">
             <PointItem />
             <PointItem />
             <PointItem />
             <PointItem />
             <PointItem />
             <PointItem />
+          </div>
+          <div class="point-list" v-else>
+            <GoodsItem />
+            <GoodsItem />
+            <GoodsItem />
+            <GoodsItem />
           </div>
         </div>
       </div>
@@ -51,6 +57,7 @@
 <script lang="ts" setup>
 import { reactive, ref, defineEmits, computed } from 'vue';
 import PointItem from './pointItem.vue';
+import GoodsItem from './goodsItem.vue';
 const props = defineProps({
   show: {
     type: Boolean,

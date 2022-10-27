@@ -5,6 +5,10 @@ const router = createRouter({
       path: '/',
       component: () => import('@/views/home/index.vue'),
     },
+    {
+      path: '/game/:id',
+      component: () => import('@/views/game/index.vue'),
+    },
   ],
   history: createWebHistory(),
 });
