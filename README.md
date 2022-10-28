@@ -7,6 +7,7 @@
 3. 安装依赖: `pnpm install`
 4. 运行项目: `pnpm run dev`
 5. 构建项目资源: `pnpm run build`
+6. 单独本地运行某一个应用： `pnpm run dev:wap` 、`pnpm run dev:pc` 、`pnpm run dev:admin`
 
 ## 目录结构说明
 

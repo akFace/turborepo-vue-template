@@ -19,37 +19,47 @@
         </div>
       </template>
       <template #right>
-        <van-icon name="search" size="18" />
+        <div class="nav-right-box">
+          <div class="user-btn" @click="showPopup = true">
+            <span class="coin-num">232343</span>
+          </div>
+        </div>
       </template>
     </van-nav-bar>
+    <div class="game-notice">恭喜xxx获得了xxx</div>
     <div class="game-live">
-      <div class="game-live-player"></div>
+      <div class="game-live-player">
+        <div class="game-bg"></div>
+        <Player
+          :muted="true"
+          url="webrtc://saas-live-pull.xiehou360.com/live/1018test?txSecret=91cacd32dc42d59c13191b01c0b34714&txTime=635CECE2"
+        />
+      </div>
+      <div class="game-bottom">
+        <div class="game-action">
+          <div class="my-wallet"></div>
+          <van-button class="action-btn" round type="success"
+            >開始遊戲</van-button
+          >
+        </div>
+      </div>
+      <div class="game-right">
+        <div class="action-item"></div>
+        <div class="action-item"></div>
+      </div>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
 import { reactive, ref } from 'vue';
-import navBar from '@/layout/navBar.vue';
+import Player from '@/components/player/index.vue';
+import { showDialog } from '@/components/common/dialog/index';
+const showPopup = ref(false);
 </script>
 <style lang="scss" scoped>
 .nav-bar-game {
+  top: 10px;
   background: transparent;
-}
-.game-detail {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  color: #fff;
-  .game-live-player {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('https://img2.baidu.com/it/u=1483173994,3145449881&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666976400&t=553eb1f2da7a42f1e460939127a3eb59');
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
   .nav-left-box {
     .user-head {
       display: flex;
@@ -89,6 +99,122 @@ import navBar from '@/layout/navBar.vue';
       .name {
         font-size: 10px;
       }
+    }
+  }
+  .nav-right-box {
+    .user-btn {
+      width: 108px;
+      height: 32px;
+      background: url('../../assets/image/home/cion-btn@2x.png') no-repeat;
+      line-height: 32px;
+      background-size: 100%;
+      text-align: center;
+      .coin-num {
+        padding-left: 10px;
+        font-size: 12px;
+      }
+    }
+  }
+}
+.game-detail {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  color: #fff;
+  .game-notice {
+    position: absolute;
+    top: 84px;
+    padding: 3px 15px;
+    background: rgb(0, 0, 0, 0.5);
+    border-radius: 20px;
+    z-index: 1;
+    text-align: center;
+    font-size: 11px;
+    animation: moveScroll 8s linear infinite;
+  }
+  .game-live-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    .game-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('https://img2.baidu.com/it/u=1483173994,3145449881&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666976400&t=553eb1f2da7a42f1e460939127a3eb59');
+      background-repeat: no-repeat;
+      background-size: cover;
+      z-index: -1;
+      &::after {
+        display: block;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgb(0, 0, 0, 0.4);
+      }
+    }
+  }
+  .game-bottom {
+    padding: 0 22px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .game-action {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+    .my-wallet {
+      position: absolute;
+      left: 0;
+      width: 54px;
+      height: 54px;
+      background: #d7d1ff;
+      border-radius: 50%;
+      box-shadow: 0px 1px 1px 0px #33148c,
+        0px 1px 2px 0px rgba(255, 255, 255, 0.5) inset;
+    }
+    .action-btn {
+      width: 160px;
+      margin: 0 auto;
+      font-size: 18px;
+      font-weight: normal;
+      text-align: center;
+      color: #ffffff;
+    }
+  }
+  .game-right {
+    position: absolute;
+    top: 20%;
+    right: 22px;
+    .action-item {
+      width: 32px;
+      height: 32px;
+      background: #d7d1ff;
+      margin-bottom: 10px;
+      border-radius: 50%;
+      box-shadow: 0px 1px 1px 0px #33148c,
+        0px 1px 2px 0px rgba(255, 255, 255, 0.5) inset;
+    }
+  }
+  @keyframes moveScroll {
+    0% {
+      transform: translateX(250%);
+    }
+    100% {
+      transform: translateX(-100%);
     }
   }
 }

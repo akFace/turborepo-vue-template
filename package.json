@@ -8,6 +8,9 @@
   ],
   "scripts": {
     "dev": "turbo run dev --parallel",
+    "dev:pc": "cd apps/client && pnpm run dev",
+    "dev:wap": "cd apps/client-mobile && pnpm run dev",
+    "dev:admin": "cd apps/admin && pnpm run dev",
     "test": "echo ${npm_package_name}",
     "build": "turbo run build",
     "lint": "turbo run lint",
