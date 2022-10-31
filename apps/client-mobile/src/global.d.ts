@@ -12,3 +12,4 @@ declare module 'page-lifecycle' {
   } from 'page-lifecycle';
 }
 declare module 'js-image-compressor';
+declare module 'video-animation-player';

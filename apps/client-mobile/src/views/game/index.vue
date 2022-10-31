@@ -4,7 +4,7 @@
       <template #left>
         <div class="nav-left-box">
           <div class="back"></div>
-          <div class="user-head">
+          <div class="user-head" @click="showPrizeAnimate = true">
             <div class="user-img">
               <img
                 src="https://img0.baidu.com/it/u=2703585149,4271457684&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
@@ -20,7 +20,7 @@
       </template>
       <template #right>
         <div class="nav-right-box">
-          <div class="user-btn" @click="showPopup = true">
+          <div class="user-btn" @click="showchargePopup = true">
             <span class="coin-num">232343</span>
           </div>
         </div>
@@ -30,31 +30,101 @@
     <div class="game-live">
       <div class="game-live-player">
         <div class="game-bg"></div>
-        <Player
-          :muted="true"
-          url="webrtc://saas-live-pull.xiehou360.com/live/1018test?txSecret=91cacd32dc42d59c13191b01c0b34714&txTime=635CECE2"
-        />
-      </div>
-      <div class="game-bottom">
-        <div class="game-action">
-          <div class="my-wallet"></div>
-          <van-button class="action-btn" round type="success"
-            >開始遊戲</van-button
-          >
-        </div>
+        <Player ref="LivePlayer" :muted="isMuted" :url="playerUrl" />
       </div>
       <div class="game-right">
-        <div class="action-item"></div>
-        <div class="action-item"></div>
+        <div class="normal-item">
+          <div
+            class="action-item"
+            @click="showRulePopup = !showRulePopup"
+          ></div>
+        </div>
+        <div class="show-more" :class="{ 'show-more-active': showActionMore }">
+          <div
+            class="action-item"
+            @click="showActionMore = !showActionMore"
+          ></div>
+          <div class="action-item" @click="isMuted = !isMuted"></div>
+          <div
+            class="action-item"
+            @click="showBreakPopup = !showBreakPopup"
+          ></div>
+          <div
+            class="action-item"
+            @click="showFeedbackPopup = !showFeedbackPopup"
+          ></div>
+        </div>
+      </div>
+      <div class="game-bottom">
+        <div class="animate-up-area">
+          <coinAnimate />
+        </div>
+        <div class="my-coin">
+          <img
+            src="https://img0.baidu.com/it/u=2703585149,4271457684&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
+            alt=""
+          />
+          <span>已中：1673</span>
+        </div>
+        <div class="action-bar">
+          <div class="game-action">
+            <div class="my-wallet"></div>
+            <van-button class="action-btn" round type="success"
+              >開始遊戲</van-button
+            >
+            <div class="my-sway" @click="swaySubmit"></div>
+          </div>
+        </div>
       </div>
     </div>
+    <BreakPopup v-model:show="showBreakPopup" />
+    <feedback v-model:show="showFeedbackPopup" />
+    <rulePopup v-model:show="showRulePopup" />
+    <chargePopup v-model:show="showchargePopup" />
+    <prizeAnimate v-model:visible="showPrizeAnimate" />
   </div>
 </template>
 <script lang="ts" setup>
-import { reactive, ref } from 'vue';
+import { computed, reactive, ref, watch } from 'vue';
 import Player from '@/components/player/index.vue';
+import chargePopup from '@/components/pay/chargePopup.vue';
+import BreakPopup from './components/breakPopup.vue';
+import feedback from './components/feedback.vue';
+import rulePopup from './components/rulePopup.vue';
+import prizeAnimate from '@/components/prize/animate.vue';
+import coinAnimate from './components/coinAnimate.vue';
 import { showDialog } from '@/components/common/dialog/index';
-const showPopup = ref(false);
+import { useGlobalStore } from '@/stores/global';
+const LivePlayer = ref<InstanceType<typeof Player>>();
+const showchargePopup = ref(false);
+const showBreakPopup = ref(false);
+const showFeedbackPopup = ref(false);
+const showRulePopup = ref(false);
+const showActionMore = ref(false);
+const showPrizeAnimate = ref(false);
+const isMuted = ref(true);
+const cionList = ref([1, 2, 3, 4, 5, 6]);
+const playerUrl = computed(() => {
+  return ''; // 'webrtc://saas-live-pull.xiehou360.com/live/1018test?txSecret=91cacd32dc42d59c13191b01c0b34714&txTime=635CECE2';
+});
+
+const { showLoading, hideLoading } = useGlobalStore();
+
+const swaySubmit = () => {
+  showLoading();
+  setTimeout(() => {
+    hideLoading();
+  }, 1500);
+};
+
+watch(isMuted, (val) => {
+  console.log('🚀 ~ file: index.vue ~ line 93 ~ watch ~ val', val);
+  if (val) {
+    LivePlayer.value?.setVolume(0);
+  } else {
+    LivePlayer.value?.setVolume(70);
+  }
+});
 </script>
 <style lang="scss" scoped>
 .nav-bar-game {
@@ -161,22 +231,47 @@ const showPopup = ref(false);
       }
     }
   }
+  .animate-up-area {
+    position: relative;
+    max-width: 80%;
+    margin: 0 auto;
+    height: 205px;
+    background-color: rgba(0, 0, 0, 0.4);
+    font-size: 24px;
+  }
   .game-bottom {
-    padding: 0 22px;
     position: absolute;
     left: 0;
     right: 0;
     bottom: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    .my-coin {
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      img {
+        width: 22px;
+        height: 22px;
+        background: #652a13;
+        border-radius: 50%;
+        margin-right: 4px;
+      }
+    }
+    .action-bar {
+      padding: 0 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     .game-action {
       flex: 1;
       display: flex;
       align-items: center;
       position: relative;
     }
-    .my-wallet {
+    .my-wallet,
+    .my-sway {
       position: absolute;
       left: 0;
       width: 54px;
@@ -185,6 +280,10 @@ const showPopup = ref(false);
       border-radius: 50%;
       box-shadow: 0px 1px 1px 0px #33148c,
         0px 1px 2px 0px rgba(255, 255, 255, 0.5) inset;
+    }
+    .my-sway {
+      left: auto;
+      right: 0;
     }
     .action-btn {
       width: 160px;
@@ -198,15 +297,41 @@ const showPopup = ref(false);
   .game-right {
     position: absolute;
     top: 20%;
-    right: 22px;
+    right: 10px;
     .action-item {
       width: 32px;
       height: 32px;
       background: #d7d1ff;
-      margin-bottom: 10px;
+      margin-top: 10px;
       border-radius: 50%;
       box-shadow: 0px 1px 1px 0px #33148c,
         0px 1px 2px 0px rgba(255, 255, 255, 0.5) inset;
+    }
+    .normal-item,
+    .show-more {
+      padding: 0 7px;
+    }
+    .show-more {
+      transition: all 200ms;
+      height: 52px;
+      overflow: hidden;
+      &.show-more-active {
+        position: relative;
+        height: auto;
+        overflow: visible;
+        &::after {
+          display: block;
+          content: '';
+          position: absolute;
+          top: -7px;
+          left: 0;
+          right: 0;
+          bottom: -7px;
+          background-color: rgba(0, 0, 0, 0.4);
+          border-radius: 40px;
+          z-index: -1;
+        }
+      }
     }
   }
   @keyframes moveScroll {

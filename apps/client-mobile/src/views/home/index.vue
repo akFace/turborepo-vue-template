@@ -52,14 +52,14 @@
       <game-item />
       <game-item />
     </div>
-    <ChargePopup v-model:show="showPopup" />
+    <exchangePopup v-model:show="showPopup" />
   </div>
 </template>
 <script lang="ts" setup>
 import { reactive, ref } from 'vue';
 import navBar from '@/layout/navBar.vue';
 import GameItem from './components/gameItem.vue';
-import ChargePopup from './components/chargePopup.vue';
+import exchangePopup from '@/components/pay/exchangePopup.vue';
 import { showDialog } from '@/components/common/dialog/index';
 const showPopup = ref(true);
 const doShowDialog = () => {
