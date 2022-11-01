@@ -61,7 +61,7 @@ import navBar from '@/layout/navBar.vue';
 import GameItem from './components/gameItem.vue';
 import exchangePopup from '@/components/pay/exchangePopup.vue';
 import { showDialog } from '@/components/common/dialog/index';
-const showPopup = ref(true);
+const showPopup = ref(false);
 const doShowDialog = () => {
   showDialog(
     `已兑换出<img style="width: 20px;height: 20px;margin: 0 3px;" src="https://img0.baidu.com/it/u=2703585149,4271457684&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" />1000`,

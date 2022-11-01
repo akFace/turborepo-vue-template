@@ -1,6 +1,8 @@
 import { createApp } from 'vue';
 import 'lib-flexible';
 import App from './App.vue';
+import Vue3Tour from 'vue3-tour';
+import 'vue3-tour/dist/vue3-tour.css';
 // 必要的一些模块
 import router from '@/router';
 import i18n from '@/i18n';
@@ -22,6 +24,7 @@ initSentry(app, router);
 app.use(router);
 app.use(i18n);
 app.use(store);
+app.use(Vue3Tour);
 app.component('load-img', LoadImg);
 app.use(Vant);
 app.mount('#app');

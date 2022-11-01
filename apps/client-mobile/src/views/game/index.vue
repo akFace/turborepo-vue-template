@@ -57,7 +57,7 @@
       </div>
       <div class="game-bottom">
         <div class="animate-up-area">
-          <coinAnimate />
+          <coinAnimate ref="coinAnimateUpdate" />
         </div>
         <div class="my-coin">
           <img
@@ -82,10 +82,11 @@
     <rulePopup v-model:show="showRulePopup" />
     <chargePopup v-model:show="showchargePopup" />
     <prizeAnimate v-model:visible="showPrizeAnimate" />
+    <gameDriver />
   </div>
 </template>
 <script lang="ts" setup>
-import { computed, reactive, ref, watch } from 'vue';
+import { computed, onMounted, reactive, ref, watch, nextTick } from 'vue';
 import Player from '@/components/player/index.vue';
 import chargePopup from '@/components/pay/chargePopup.vue';
 import BreakPopup from './components/breakPopup.vue';
@@ -93,9 +94,12 @@ import feedback from './components/feedback.vue';
 import rulePopup from './components/rulePopup.vue';
 import prizeAnimate from '@/components/prize/animate.vue';
 import coinAnimate from './components/coinAnimate.vue';
+import gameDriver from './components/gameDriver.vue';
+
 import { showDialog } from '@/components/common/dialog/index';
 import { useGlobalStore } from '@/stores/global';
 const LivePlayer = ref<InstanceType<typeof Player>>();
+const coinAnimateUpdate = ref<InstanceType<typeof coinAnimate>>();
 const showchargePopup = ref(false);
 const showBreakPopup = ref(false);
 const showFeedbackPopup = ref(false);
@@ -103,7 +107,6 @@ const showRulePopup = ref(false);
 const showActionMore = ref(false);
 const showPrizeAnimate = ref(false);
 const isMuted = ref(true);
-const cionList = ref([1, 2, 3, 4, 5, 6]);
 const playerUrl = computed(() => {
   return ''; // 'webrtc://saas-live-pull.xiehou360.com/live/1018test?txSecret=91cacd32dc42d59c13191b01c0b34714&txTime=635CECE2';
 });
@@ -111,10 +114,16 @@ const playerUrl = computed(() => {
 const { showLoading, hideLoading } = useGlobalStore();
 
 const swaySubmit = () => {
-  showLoading();
-  setTimeout(() => {
-    hideLoading();
-  }, 1500);
+  const coin = Math.floor(Math.random() * 100) + 20;
+  coinAnimateUpdate.value?.addCoin({
+    id: `${Date.now()}`,
+    content: `+${coin}`,
+  });
+  // cionList.value.push(coin);
+  // showLoading();
+  // setTimeout(() => {
+  //   hideLoading();
+  // }, 1500);
 };
 
 watch(isMuted, (val) => {
@@ -233,10 +242,9 @@ watch(isMuted, (val) => {
   }
   .animate-up-area {
     position: relative;
-    max-width: 80%;
+    max-width: 70%;
     margin: 0 auto;
     height: 205px;
-    background-color: rgba(0, 0, 0, 0.4);
     font-size: 24px;
   }
   .game-bottom {

@@ -1,9 +1,18 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
+import { computed, onMounted } from 'vue';
 import { useGlobalStore } from '@/stores/global';
-import { computed } from 'vue';
+import { useIm } from '@/stores/modules/Im';
 const loading = computed(() => {
   return useGlobalStore().loading;
+});
+
+const im = useIm();
+
+onMounted(() => {
+  // im.initWebSocket({
+  //   userId: '244343',
+  // });
 });
 </script>
 <template>
