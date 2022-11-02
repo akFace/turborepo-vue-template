@@ -3,17 +3,10 @@
     <h2>金币游戏1</h2>
     <div class="game-cover">
       <div class="game-status green">空闲中</div>
-      <img
-        src="https://img0.baidu.com/it/u=2703585149,4271457684&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
-        alt=""
-      />
+      <img src="@/assets/image/home/game_cover@2x.png" alt="" />
     </div>
     <div class="btn">
-      <img
-        class="icon-coin"
-        src="https://img0.baidu.com/it/u=2703585149,4271457684&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
-        alt=""
-      />
+      <img class="icon-coin" src="@/assets/image/game/ic_coins@2x.png" alt="" />
       <span>2幣/次</span>
     </div>
   </div>

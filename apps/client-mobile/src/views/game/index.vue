@@ -3,7 +3,9 @@
     <van-nav-bar class="nav-bar-game" fixed :border="false">
       <template #left>
         <div class="nav-left-box">
-          <div class="back"></div>
+          <div class="back" @click="goBack">
+            <img :src="iconBack" alt="" />
+          </div>
           <div class="user-head" @click="showPrizeAnimate = true">
             <div class="user-img">
               <img
@@ -13,7 +15,7 @@
             </div>
             <div class="user-name">
               <div class="name">分而奋斗</div>
-              <div class="user-id">232</div>
+              <div class="user-id"></div>
             </div>
           </div>
         </div>
@@ -34,45 +36,54 @@
       </div>
       <div class="game-right">
         <div class="normal-item">
-          <div
-            class="action-item"
-            @click="showRulePopup = !showRulePopup"
-          ></div>
+          <div class="action-item" @click="showRulePopup = !showRulePopup">
+            <img src="@/assets/image/game/ic_live_qa.svg" alt="" />
+          </div>
         </div>
         <div class="show-more" :class="{ 'show-more-active': showActionMore }">
-          <div
-            class="action-item"
-            @click="showActionMore = !showActionMore"
-          ></div>
-          <div class="action-item" @click="isMuted = !isMuted"></div>
-          <div
-            class="action-item"
-            @click="showBreakPopup = !showBreakPopup"
-          ></div>
+          <div class="action-item" @click="showActionMore = !showActionMore">
+            <img src="@/assets/image/game/icon-more.svg" alt="" />
+          </div>
+          <div class="action-item" @click="isMuted = !isMuted">
+            <img :src="isMuted ? iconVoiceDdisabled : iconVoice" alt="" />
+          </div>
+          <div class="action-item" @click="showBreakPopup = !showBreakPopup">
+            <img src="@/assets/image/game/icon-break.svg" alt="" />
+          </div>
           <div
             class="action-item"
             @click="showFeedbackPopup = !showFeedbackPopup"
-          ></div>
+          >
+            <img src="@/assets/image/game/icon-feedback.svg" alt="" />
+          </div>
         </div>
       </div>
       <div class="game-bottom">
+        <div class="countdown-animate-area" v-if="showCountdownAnimate">
+          <countdownAnimate :timeout="11" @finish="countDownFinish" />
+        </div>
         <div class="animate-up-area">
           <coinAnimate ref="coinAnimateUpdate" />
         </div>
         <div class="my-coin">
-          <img
-            src="https://img0.baidu.com/it/u=2703585149,4271457684&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
-            alt=""
-          />
+          <img src="@/assets/image/game/ic_coins@2x.png" alt="" />
           <span>已中：1673</span>
         </div>
         <div class="action-bar">
           <div class="game-action">
-            <div class="my-wallet"></div>
-            <van-button class="action-btn" round type="success"
-              >開始遊戲</van-button
-            >
-            <div class="my-sway" @click="swaySubmit"></div>
+            <div class="my-wallet">
+              <img src="@/assets/image/game/icon-wallet.svg" alt="" />
+            </div>
+            <van-button
+              class="action-btn"
+              round
+              type="success"
+              v-longpress="onLongpress"
+              @click="startGame"
+            ></van-button>
+            <div class="my-sway" @click="swaySubmit">
+              <img src="@/assets/image/game/icon-sway.svg" alt="" />
+            </div>
           </div>
         </div>
       </div>
@@ -82,7 +93,7 @@
     <rulePopup v-model:show="showRulePopup" />
     <chargePopup v-model:show="showchargePopup" />
     <prizeAnimate v-model:visible="showPrizeAnimate" />
-    <gameDriver />
+    <!-- <gameDriver /> -->
   </div>
 </template>
 <script lang="ts" setup>
@@ -94,7 +105,11 @@ import feedback from './components/feedback.vue';
 import rulePopup from './components/rulePopup.vue';
 import prizeAnimate from '@/components/prize/animate.vue';
 import coinAnimate from './components/coinAnimate.vue';
+import countdownAnimate from './components/countdownAnimate.vue';
 import gameDriver from './components/gameDriver.vue';
+import iconVoice from '@/assets/image/game/voice.svg';
+import iconVoiceDdisabled from '@/assets/image/game/voice-disabled.svg';
+import iconBack from '@/assets/image/icon/icon-back.svg';
 
 import { showDialog } from '@/components/common/dialog/index';
 import { useGlobalStore } from '@/stores/global';
@@ -106,6 +121,7 @@ const showFeedbackPopup = ref(false);
 const showRulePopup = ref(false);
 const showActionMore = ref(false);
 const showPrizeAnimate = ref(false);
+const showCountdownAnimate = ref(false);
 const isMuted = ref(true);
 const playerUrl = computed(() => {
   return ''; // 'webrtc://saas-live-pull.xiehou360.com/live/1018test?txSecret=91cacd32dc42d59c13191b01c0b34714&txTime=635CECE2';
@@ -126,6 +142,22 @@ const swaySubmit = () => {
   // }, 1500);
 };
 
+const goBack = () => {
+  history.back();
+};
+
+const onLongpress = () => {
+  console.log('长按触发');
+};
+
+const startGame = () => {
+  showCountdownAnimate.value = true;
+};
+
+const countDownFinish = () => {
+  showCountdownAnimate.value = false;
+};
+
 watch(isMuted, (val) => {
   console.log('🚀 ~ file: index.vue ~ line 93 ~ watch ~ val', val);
   if (val) {
@@ -140,12 +172,15 @@ watch(isMuted, (val) => {
   top: 10px;
   background: transparent;
   .nav-left-box {
+    display: flex;
+    align-items: center;
     .user-head {
+      margin-left: 4px;
       display: flex;
       align-items: center;
       width: 110px;
       height: 32px;
-      background: rgb(0, 0, 0, 0.4);
+      background: rgba(84, 57, 140, 0.43);
       border-radius: 32px;
     }
     .user-img {
@@ -164,12 +199,13 @@ watch(isMuted, (val) => {
       }
     }
     .user-id {
-      padding-left: 5px;
+      width: 34px;
+      height: 14px;
       display: flex;
       align-items: center;
       font-size: 10px;
-      background: linear-gradient(90deg, #56d3fa, #7962ff);
-      border-radius: 7.5px;
+      background: url('../../assets/image/game/tab_vip.svg') no-repeat;
+      background-size: 100%;
     }
     .user-name {
       margin-left: 8px;
@@ -184,7 +220,7 @@ watch(isMuted, (val) => {
     .user-btn {
       width: 108px;
       height: 32px;
-      background: url('../../assets/image/home/cion-btn@2x.png') no-repeat;
+      background: url('../../assets/image/game/bg_coin@2x.png') no-repeat;
       line-height: 32px;
       background-size: 100%;
       text-align: center;
@@ -224,8 +260,8 @@ watch(isMuted, (val) => {
       left: 0;
       right: 0;
       bottom: 0;
-      background: url('https://img2.baidu.com/it/u=1483173994,3145449881&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666976400&t=553eb1f2da7a42f1e460939127a3eb59');
-      background-repeat: no-repeat;
+      background: $bgColor url('../../assets/image/bg@2x.png') no-repeat;
+      background-attachment: fixed;
       background-size: cover;
       z-index: -1;
       &::after {
@@ -245,7 +281,15 @@ watch(isMuted, (val) => {
     max-width: 70%;
     margin: 0 auto;
     height: 205px;
-    font-size: 24px;
+    font-size: 16px;
+  }
+
+  .countdown-animate-area {
+    position: absolute;
+    bottom: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
   }
   .game-bottom {
     position: absolute;
@@ -282,24 +326,24 @@ watch(isMuted, (val) => {
     .my-sway {
       position: absolute;
       left: 0;
-      width: 54px;
-      height: 54px;
-      background: #d7d1ff;
-      border-radius: 50%;
-      box-shadow: 0px 1px 1px 0px #33148c,
-        0px 1px 2px 0px rgba(255, 255, 255, 0.5) inset;
+      width: 56px;
+      height: 56px;
     }
     .my-sway {
       left: auto;
       right: 0;
     }
     .action-btn {
-      width: 160px;
+      width: 170px;
+      height: 62px;
       margin: 0 auto;
       font-size: 18px;
       font-weight: normal;
       text-align: center;
       color: #ffffff;
+      background: url('../../assets/image/game/btn-start@2x.png') no-repeat;
+      background-size: 100%;
+      border: none;
     }
   }
   .game-right {
@@ -307,13 +351,12 @@ watch(isMuted, (val) => {
     top: 20%;
     right: 10px;
     .action-item {
-      width: 32px;
-      height: 32px;
-      background: #d7d1ff;
       margin-top: 10px;
       border-radius: 50%;
-      box-shadow: 0px 1px 1px 0px #33148c,
-        0px 1px 2px 0px rgba(255, 255, 255, 0.5) inset;
+      img {
+        width: 36px;
+        height: 36px;
+      }
     }
     .normal-item,
     .show-more {
@@ -350,5 +393,19 @@ watch(isMuted, (val) => {
       transform: translateX(-100%);
     }
   }
+}
+.action-btn-test {
+  display: block;
+  width: 190px;
+  height: 70px;
+  margin: 0 auto;
+  background: linear-gradient(360deg, #f9b809 0%, #fad302 100%);
+  border-radius: 8px;
+  box-shadow: 0px 1px 3px 0px rgba(255, 255, 255, 0.5) inset,
+    0px -3px 1px 0px #f57813 inset;
+  border: none;
+  font-weight: bold;
+  font-size: 34px;
+  text-shadow: #d36833 1px 4px 1px;
 }
 </style>

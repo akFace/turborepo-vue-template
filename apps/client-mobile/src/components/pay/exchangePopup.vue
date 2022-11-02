@@ -27,11 +27,11 @@
         <div class="point-box">
           <div class="point-num">
             <div class="point-left">
-              <img src="" alt="" />
+              <img src="@/assets/image/icon/icon-diamond.svg" alt="" />
               <span>23423</span>
             </div>
             <div class="point-right">
-              <img src="" alt="" />
+              <img src="@/assets/image/icon/ic_coin.svg" alt="" />
               <span>23423</span>
             </div>
           </div>
@@ -176,6 +176,12 @@ const change = (tab: any) => {
     .point-right {
       flex: 1;
       text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+        margin-right: 4px;
+      }
     }
     .point-left {
       position: relative;

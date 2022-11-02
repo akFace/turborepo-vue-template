@@ -1,6 +1,6 @@
-import { ElLoading } from 'element-plus';
-import { nextTick } from 'vue';
-import _ from 'lodash';
+import { ElLoading } from "element-plus";
+import { nextTick } from "vue";
+import _ from "lodash";
 let loadingInstance: any = null; //loading 实例
 let needLoadingRequestCount = 0; //当前正在请求的数量
 
@@ -17,8 +17,8 @@ export function showLoading(text?: string) {
     loadingInstance = ElLoading.service({
       fullscreen: true,
       lock: false, //是否锁定屏幕的滚动
-      background: 'rgba(0,0,0, 0.5)',
-      text: text || '',
+      background: "rgba(0,0,0, 0.5)",
+      text: text || ""
     });
   }
   needLoadingRequestCount++;

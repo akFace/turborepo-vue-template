@@ -12,16 +12,21 @@
     @click-left="clickLeft"
     @click-right="clickRight"
   >
-    <div slot="left" v-if="leftIcoin" @click="clickLeft">
-      <img src="" alt="" />
-    </div>
-    <div slot="right" v-if="rightIcoin" @click="clickRight">
-      <img src="" alt="" />
-    </div>
+    <template #left>
+      <div slot="left" v-if="leftIcoin" @click="clickLeft">
+        <img :src="props.leftIcoin" alt="" />
+      </div>
+    </template>
+    <template #right>
+      <div slot="right" v-if="rightIcoin" @click="clickRight">
+        <img :src="props.rightIcoin" alt="" />
+      </div>
+    </template>
   </van-nav-bar>
 </template>
 <script lang="ts" setup>
 import { reactive, ref, defineProps, defineEmits } from 'vue';
+import iconBack from '@/assets/image/icon/icon-back.svg';
 export interface Props {
   leftIcoin?: string;
   rightIcoin?: string;
@@ -40,9 +45,11 @@ const props = withDefaults(defineProps<Props>(), {
   title: '',
   border: false,
   zIndex: 999,
+  leftIcoin: iconBack,
 });
 const emit = defineEmits(['click-left', 'click-right']);
 const clickLeft = (event: MouseEvent) => {
+  history.back();
   emit('click-left', event);
 };
 const clickRight = (event: MouseEvent) => {

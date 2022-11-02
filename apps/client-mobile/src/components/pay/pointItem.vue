@@ -1,23 +1,14 @@
 <template>
   <div class="point-item-card">
     <div class="point-cover">
-      <img
-        src="https://img0.baidu.com/it/u=2703585149,4271457684&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
-        alt=""
-      />
+      <img src="@/assets/image/game/bg_recharge3@2x.png" alt="" />
     </div>
     <div class="point-count">
-      <img
-        src="https://img0.baidu.com/it/u=2703585149,4271457684&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
-        alt=""
-      />
+      <img src="@/assets/image/icon/ic_coin.svg" alt="" />
       <span>1000</span>
     </div>
-    <div class="btn">
-      <img
-        src="https://img0.baidu.com/it/u=2703585149,4271457684&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
-        alt=""
-      />
+    <div class="mini-btn btn">
+      <img src="@/assets/image/icon/icon-diamond.svg" alt="" />
       <span>1000</span>
     </div>
   </div>
@@ -36,13 +27,10 @@ import { reactive, ref } from 'vue';
     0px 1px 3px 0px rgba(255, 255, 255, 0.5) inset;
 
   .point-cover {
-    padding-top: 5px;
     text-align: center;
     img {
-      width: 99px;
-      height: 66px;
-      box-shadow: 0px 2px 8px 0px rgba(200, 72, 10, 0.6);
-      object-fit: cover;
+      width: 100%;
+      height: auto;
     }
   }
   .point-count,
@@ -56,6 +44,7 @@ import { reactive, ref } from 'vue';
   }
   .point-count {
     margin: 10px 0;
+    margin-top: -44px;
   }
   .btn {
     position: absolute;

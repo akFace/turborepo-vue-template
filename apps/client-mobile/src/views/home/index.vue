@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <nav-bar title="推幣機" />
+    <nav-bar title="推幣機" :right-icoin="iconRank" />
     <div class="box-hd">
       <div class="user-info">
         <div class="user-head" @click="doShowDialog">
@@ -22,7 +22,7 @@
       <div class="notice-box">
         <img
           class="icon-sound"
-          src="https://img0.baidu.com/it/u=2703585149,4271457684&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
+          src="@/assets/image/icon/ic_horn@2x.png"
           alt=""
         />
         <div class="notice-content">
@@ -61,10 +61,13 @@ import navBar from '@/layout/navBar.vue';
 import GameItem from './components/gameItem.vue';
 import exchangePopup from '@/components/pay/exchangePopup.vue';
 import { showDialog } from '@/components/common/dialog/index';
+import iconCoin from '@/assets/image/icon/ic_coin.svg';
+import iconRank from '@/assets/image/icon/icon-rank.svg';
+
 const showPopup = ref(false);
 const doShowDialog = () => {
   showDialog(
-    `已兑换出<img style="width: 20px;height: 20px;margin: 0 3px;" src="https://img0.baidu.com/it/u=2703585149,4271457684&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" />1000`,
+    `已兑换出<img style="width: 20px;height: 20px;margin: 0 3px;" src="${iconCoin}" />1000`,
     '这是标题',
     {
       allowHtml: true,
@@ -119,7 +122,7 @@ const doShowDialog = () => {
     .user-btn {
       width: 108px;
       height: 32px;
-      background: url('../../assets/image/home/cion-btn@2x.png') no-repeat;
+      background: url('../../assets/image/game/bg_coin@2x.png') no-repeat;
       line-height: 32px;
       background-size: 100%;
       text-align: center;
@@ -138,8 +141,8 @@ const doShowDialog = () => {
       display: flex;
       align-items: center;
       .icon-sound {
-        width: 18px;
-        height: 15px;
+        width: 20px;
+        height: 20px;
         margin-right: 11px;
       }
       .user-img-mini {

@@ -93,8 +93,10 @@ i {
   max-width: 750px;
   margin: 0 auto;
   min-height: 100vh;
-  background-color: $bgColor;
   color: #fff;
+  background: $bgColor url('../image/bg@2x.png') no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
   padding-bottom: calc(20px + constant(safe-area-inset-bottom));
   padding-bottom: calc(20px + env(safe-area-inset-bottom));
 }
@@ -117,6 +119,16 @@ i {
   background: linear-gradient(360deg, #f9b809 0%, #fad302 100%);
   box-shadow: 0px 1px 0 0px rgba(255, 255, 255, 0.5) inset,
     0px -3px 1px 0px #f57813 inset;
+  &::after {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 28px;
+    height: 23px;
+    display: block;
+    content: '';
+    background: url('../image/icon/icon-btn.svg') no-repeat;
+  }
 }
 
 .van-button--primary {
@@ -126,6 +138,16 @@ i {
     0px -3px 1px 0px #f57813 inset;
   border: none;
   font-weight: 600;
+  &::after {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 28px;
+    height: 23px;
+    display: block;
+    content: '';
+    background: url('../image/icon/icon-btn.svg') no-repeat;
+  }
 }
 
 .vant-popup-box {
@@ -133,4 +155,18 @@ i {
   border-radius: 8px 8px 0px 0px;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5),
     0px 1px 1px 0px rgba(255, 255, 255, 0.5) inset;
+}
+
+.mini-btn {
+  position: relative;
+  &::after {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 10px;
+    height: 10px;
+    display: block;
+    content: '';
+    background: url('../image/icon/icon-btn-mini.svg') no-repeat;
+  }
 }

@@ -129,3 +129,9 @@ export interface RouteConfigsTable {
   /** 子路由配置项 */
   children?: Array<RouteChildrenConfigsTable>;
 }
+
+export interface IAxiosConfig {
+  showLoading?: boolean;
+  showErrorMsg?: boolean;
+  hasResolve?: boolean;
+}

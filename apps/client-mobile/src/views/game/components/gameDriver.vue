@@ -32,16 +32,6 @@ const initDriver = () => {
         description: 'Body of the popover',
         position: 'top-center',
       },
-      onNext: () => {
-        // Prevent moving to the next step
-        driver.preventMove();
-
-        // Perform some action or create the element to move to
-        // And then move to that element
-        setTimeout(() => {
-          driver.moveNext();
-        }, 200);
-      },
     },
     {
       element: '.my-sway',

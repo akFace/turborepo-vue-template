@@ -36,8 +36,7 @@
     "video-animation-player": "^1.0.5",
     "vue": "^3.2.25",
     "vue-i18n": "9.1.9",
-    "vue-router": "^4.0.14",
-    "vue3-tour": "^0.3.3"
+    "vue-router": "^4.0.14"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^3.1.9",

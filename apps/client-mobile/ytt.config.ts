@@ -15,7 +15,7 @@ export default defineConfig([
     projects: [
       {
         token:
-          'a02e07485c21e4b26ea3b2c12cecc3406f1075e446e71cb1845f97783d2a7409',
+          '3aa271a9d752e31c029127d48470d64420e8b6e1c112a40a20b9afa62f8a43c5',
         categories: [
           {
             id: 0,
