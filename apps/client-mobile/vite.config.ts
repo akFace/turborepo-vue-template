@@ -13,7 +13,7 @@ export default defineConfig({
     open: false,
     host: '0.0.0.0',
     proxy: {
-      '/livefront/': {
+      '/api/': {
         // target: 'http://43.129.181.111',
         target: 'https://m.fruitmedia-hk.com',
         // target: 'http://livestream.inet',

@@ -3,6 +3,7 @@ import { getLangType } from '@ssb/utils';
 import { RequestFunctionParams } from 'yapi-to-typescript';
 import { showToast } from '@shixiyi/utils';
 import { useGlobalStore } from '@/stores/global';
+import { STATUS_CODE } from '@/utils/constant';
 
 export interface RequestOptions {
   /**
@@ -50,7 +51,7 @@ axiosRequest.interceptors.request.use(
       ...config,
       headers: {
         ...headers,
-        'auth-token': localStorage.getItem('auto-token'),
+        Authorization: localStorage.getItem('Authorization'),
         'Language-Type': getLangType(),
         'Cache-Control': 'no-cache',
       },
@@ -68,12 +69,8 @@ axiosRequest.interceptors.response.use(
     useGlobalStore().hideLoading();
     // 对响应数据做点什么
     const data = response.data || {};
-    const { msg, code, tip } = data || {};
-    if (code === 601 || code === 602 || code === 603) {
-      data.code == code;
-      return data;
-    }
-    if (code === 1) {
+    const { msg, code, tip } = data;
+    if (code === STATUS_CODE.SUCCESS) {
       return data;
     } else {
       console.error(

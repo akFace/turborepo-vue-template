@@ -1,9 +1,13 @@
+import {
+  getApiFinanceUsersInfo,
+  GetApiFinanceUsersInfoResponse,
+} from '@/services';
 import { defineStore, StateTree, _GettersTree } from 'pinia';
 
-export const useStudent = defineStore('student', {
+export const useUser = defineStore('userInfo', {
   state() {
     return {
-      info: null,
+      info: {} as GetApiFinanceUsersInfoResponse,
     };
   },
   actions: {
@@ -11,6 +15,13 @@ export const useStudent = defineStore('student', {
       this.$patch((state) => {
         state.info = info;
       });
+    },
+    async login() {},
+    async getUserInfo() {
+      const { info }: any = await getApiFinanceUsersInfo();
+      if (info) {
+        this.updateUserInfo(info);
+      }
     },
   },
 });

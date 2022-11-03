@@ -12,7 +12,8 @@
   "dependencies": {
     "@sentry/tracing": "^6.19.3",
     "@sentry/vue": "^6.19.3",
-    "@shixiyi/utils": "1.0.6",
+    "@shixiyi/im-core": "^1.0.67",
+    "@shixiyi/utils": "^1.0.16",
     "@ssb/utils": "workspace:*",
     "@vueuse/core": "^8.2.4",
     "axios": "^0.26.1",

@@ -45,13 +45,31 @@
         />
       </div>
     </div>
-    <div class="game-list">
-      <game-item />
-      <game-item />
-      <game-item />
-      <game-item />
-      <game-item />
-    </div>
+    <van-list
+      v-model:loading="loading"
+      :finished="finished"
+      finished-text="没有更多了"
+      v-model:error="error"
+      error-text="请求失败，点击重新加载"
+      @load="onLoad"
+    >
+      <div class="game-list">
+        <van-cell
+          class="game-item"
+          v-for="item in pageInfo.list"
+          :key="item.id"
+          :info="item"
+        >
+          <game-item :info="item" />
+        </van-cell>
+        <van-cell class="game-item">
+          <game-item />
+        </van-cell>
+        <van-cell class="game-item">
+          <game-item />
+        </van-cell>
+      </div>
+    </van-list>
     <exchangePopup v-model:show="showPopup" />
   </div>
 </template>
@@ -63,8 +81,29 @@ import exchangePopup from '@/components/pay/exchangePopup.vue';
 import { showDialog } from '@/components/common/dialog/index';
 import iconCoin from '@/assets/image/icon/ic_coin.svg';
 import iconRank from '@/assets/image/icon/icon-rank.svg';
+import {
+  getApiFinanceMachines,
+  GetApiFinanceMachinesResponse,
+} from '@/services';
 
 const showPopup = ref(false);
+const loading = ref(false);
+const finished = ref(false);
+const error = ref(false);
+let pageInfo = reactive<
+  {
+    pageSize: number;
+    pageNum: number;
+  } & GetApiFinanceMachinesResponse
+>({
+  pageSize: 20,
+  pageNum: 1,
+  pageTurn: {
+    pageSize: 20,
+    page: 1,
+  },
+  list: [],
+});
 const doShowDialog = () => {
   showDialog(
     `已兑换出<img style="width: 20px;height: 20px;margin: 0 3px;" src="${iconCoin}" />1000`,
@@ -75,6 +114,30 @@ const doShowDialog = () => {
   ).then(() => {
     console.log(222222);
   });
+};
+
+const onLoad = async () => {
+  if (loading.value) {
+    return;
+  }
+  // 异步更新数据
+  loading.value = true;
+  finished.value = false;
+  pageInfo.pageNum++;
+  getApiFinanceMachines({
+    pageSize: pageInfo.pageSize as any,
+    pageNum: pageInfo.pageNum as any,
+  })
+    .then((res: any) => {
+      pageInfo.list = res.list;
+      pageInfo.pageTurn = res.pageTurn;
+      loading.value = false;
+      finished.value = true;
+    })
+    .catch(() => {
+      loading.value = false;
+      error.value = true;
+    });
 };
 </script>
 <style lang="scss" scoped>
@@ -177,6 +240,13 @@ const doShowDialog = () => {
     grid-template-columns: 1fr 1fr;
     grid-row-gap: 15px;
     grid-column-gap: 15px;
+    .game-item {
+      padding: 0;
+      background-color: transparent;
+      &::after {
+        border: none;
+      }
+    }
   }
 }
 </style>

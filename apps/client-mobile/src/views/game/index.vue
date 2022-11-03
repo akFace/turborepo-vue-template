@@ -22,7 +22,7 @@
       </template>
       <template #right>
         <div class="nav-right-box">
-          <div class="user-btn" @click="showchargePopup = true">
+          <div class="user-btn">
             <span class="coin-num">232343</span>
           </div>
         </div>
@@ -71,17 +71,49 @@
         </div>
         <div class="action-bar">
           <div class="game-action">
-            <div class="my-wallet">
+            <div class="my-wallet" @click="showchargePopup = true">
               <img src="@/assets/image/game/icon-wallet.svg" alt="" />
             </div>
-            <van-button
-              class="action-btn"
-              round
-              type="success"
-              v-longpress="onLongpress"
-              @click="startGame"
-            ></van-button>
-            <div class="my-sway" @click="swaySubmit">
+            <div class="center-action">
+              <van-button
+                class="action-btn login"
+                round
+                type="success"
+                @click="loginMachine"
+                v-if="buttonStatus === MACHINE_PLAYER_STATUS.INIT"
+              ></van-button>
+              <van-button
+                class="action-btn playing"
+                round
+                type="success"
+                v-longpress="onLongpress"
+                @click="playGame"
+                v-if="buttonStatus === MACHINE_PLAYER_STATUS.PLAYING"
+              ></van-button>
+              <van-button
+                class="action-btn auto-playing"
+                round
+                type="success"
+                @click="stopAutoPlay"
+                v-if="buttonStatus === MACHINE_PLAYER_STATUS.AUTO_PLAY"
+              >
+                <p>(自动投币中)</p>
+                <p>停止</p>
+              </van-button>
+              <van-button
+                class="action-btn used"
+                round
+                type="success"
+                v-if="buttonStatus === MACHINE_PLAYER_STATUS.USED"
+              ></van-button>
+              <van-button
+                class="action-btn repair"
+                round
+                type="success"
+                v-if="buttonStatus === MACHINE_PLAYER_STATUS.REPAIRS"
+              ></van-button>
+            </div>
+            <div class="my-sway" @click="playSwing">
               <img src="@/assets/image/game/icon-sway.svg" alt="" />
             </div>
           </div>
@@ -112,7 +144,24 @@ import iconVoiceDdisabled from '@/assets/image/game/voice-disabled.svg';
 import iconBack from '@/assets/image/icon/icon-back.svg';
 
 import { showDialog } from '@/components/common/dialog/index';
+import { showToast } from '@shixiyi/utils';
+import {
+  getCurrentClient as useImClient,
+  IMClient,
+  ICustomMessage,
+} from '@shixiyi/im-core';
 import { useGlobalStore } from '@/stores/global';
+import {
+  postApiFinanceMachinesLogin,
+  postApiFinanceMachinesPlay,
+  postApiFinanceMachinesSwing,
+} from '@/services';
+import {
+  MACHINE_OPERATE_TYPE,
+  MACHINE_PLAYER_STATUS,
+  STATUS_CODE,
+} from '@/utils/constant';
+import { useMessage } from '@/stores/modules/message';
 const LivePlayer = ref<InstanceType<typeof Player>>();
 const coinAnimateUpdate = ref<InstanceType<typeof coinAnimate>>();
 const showchargePopup = ref(false);
@@ -123,11 +172,44 @@ const showActionMore = ref(false);
 const showPrizeAnimate = ref(false);
 const showCountdownAnimate = ref(false);
 const isMuted = ref(true);
+const buttonStatus = ref(MACHINE_PLAYER_STATUS.INIT); // 默认空闲状态
+const loginMachineInfo = ref<any>(null);
 const playerUrl = computed(() => {
-  return ''; // 'webrtc://saas-live-pull.xiehou360.com/live/1018test?txSecret=91cacd32dc42d59c13191b01c0b34714&txTime=635CECE2';
+  return 'https://1500005692.vod2.myqcloud.com/43843706vodtranscq1500005692/62656d94387702300542496289/v.f100240.m3u8'; // 'webrtc://saas-live-pull.xiehou360.com/live/1018test?txSecret=91cacd32dc42d59c13191b01c0b34714&txTime=635CECE2';
 });
 
+let TimClient: IMClient | null = null;
+
+let countDownTime = 60; // 倒计时之后不投币则关掉机器
+let playTimer: any = null;
+
 const { showLoading, hideLoading } = useGlobalStore();
+const isloginTim = computed(() => {
+  return useMessage().isLoginIm;
+});
+
+watch(
+  isloginTim,
+  (val) => {
+    if (val) {
+      // 登录完IM后初始化监听
+      initTimEvent();
+    }
+  },
+  {
+    immediate: true,
+  }
+);
+
+const initTimEvent = () => {
+  TimClient = useImClient();
+  // 收到用户中奖
+  TimClient?.on('PRIZE', onPrize);
+};
+
+const onPrize = (data: ICustomMessage) => {
+  console.log('🚀 ~ file: index.vue ~ line 167 ~ onPrize ~ data', data);
+};
 
 const swaySubmit = () => {
   const coin = Math.floor(Math.random() * 100) + 20;
@@ -148,14 +230,87 @@ const goBack = () => {
 
 const onLongpress = () => {
   console.log('长按触发');
+  autoPlay();
 };
 
-const startGame = () => {
-  showCountdownAnimate.value = true;
+// 登录机器
+const loginMachine = async () => {
+  try {
+    const params = { machineId: 23211 };
+    const res: any = await postApiFinanceMachinesLogin(params, {
+      showLoading: true,
+      showErrorMsg: false,
+      hasResolve: true,
+    });
+    if (res.code === STATUS_CODE.SUCCESS) {
+      loginMachineInfo.value = res.info;
+      buttonStatus.value = MACHINE_PLAYER_STATUS.PLAYING;
+      setCountdown();
+    } else {
+      showDialog(res.tip);
+    }
+  } catch (error) {
+    showToast(error as string);
+  }
+};
+
+// 开始投币
+const playGame = async () => {
+  showCountdownAnimate.value = false;
+  const res = await postApiFinanceMachinesPlay({
+    machineId: 23211,
+  });
+  setCountdown();
+};
+// 摇摆
+const playSwing = async () => {
+  const res = await postApiFinanceMachinesSwing({
+    machineId: 23211,
+    operateId: loginMachineInfo.value?.operateId,
+  });
+};
+
+// 设置倒计时
+let timeCount = countDownTime;
+const setCountdown = () => {
+  if (playTimer) {
+    clearInterval(playTimer);
+  }
+  timeCount = countDownTime;
+  playTimer = setInterval(() => {
+    timeCount--;
+    if (timeCount <= 10) {
+      showCountdownAnimate.value = true;
+      clearInterval(playTimer);
+    }
+  }, 1000);
+};
+
+// 自动投币
+let autoPlayTimer: any = null;
+const autoPlay = () => {
+  clearInterval(autoPlayTimer);
+  buttonStatus.value = MACHINE_PLAYER_STATUS.AUTO_PLAY;
+  autoPlayTimer = setInterval(() => {
+    // 循环调用投币接口
+    postApiFinanceMachinesPlay({
+      machineId: 23211,
+    });
+  }, 300);
+};
+
+const stopAutoPlay = () => {
+  buttonStatus.value = MACHINE_PLAYER_STATUS.PLAYING;
+  clearInterval(autoPlayTimer);
 };
 
 const countDownFinish = () => {
+  // 倒计时结束还原机器状态
   showCountdownAnimate.value = false;
+  buttonStatus.value = MACHINE_PLAYER_STATUS.INIT;
+  showToast('由于您长时间未操作机器，已为您自动下机', {
+    duration: 4000,
+  });
 };
 
 watch(isMuted, (val) => {
@@ -233,6 +388,8 @@ watch(isMuted, (val) => {
 }
 .game-detail {
   position: relative;
+  max-width: 750px;
+  margin: 0 auto;
   height: 100vh;
   overflow: hidden;
   color: #fff;
@@ -333,6 +490,10 @@ watch(isMuted, (val) => {
       left: auto;
       right: 0;
     }
+    .center-action {
+      width: 170px;
+      margin: 0 auto;
+    }
     .action-btn {
       width: 170px;
       height: 62px;
@@ -341,9 +502,22 @@ watch(isMuted, (val) => {
       font-weight: normal;
       text-align: center;
       color: #ffffff;
-      background: url('../../assets/image/game/btn-start@2x.png') no-repeat;
+      background-color: transparent;
+      background-repeat: no-repeat;
       background-size: 100%;
       border: none;
+      &.login {
+        background-image: url('../../assets/image/game/btn-start@2x.png');
+      }
+      &.playing {
+        background-image: url('../../assets/image/game/btn-put-coin@2x.png');
+      }
+      &.used {
+        background-image: url('../../assets/image/game/btn-used@2x.png');
+      }
+      &.repair {
+        background-image: url('../../assets/image/game/btn-repair@2x.png');
+      }
     }
   }
   .game-right {
@@ -351,6 +525,8 @@ watch(isMuted, (val) => {
     top: 20%;
     right: 10px;
     .action-item {
+      position: relative;
+      z-index: 1;
       margin-top: 10px;
       border-radius: 50%;
       img {
@@ -380,7 +556,6 @@ watch(isMuted, (val) => {
           bottom: -7px;
           background-color: rgba(0, 0, 0, 0.4);
           border-radius: 40px;
-          z-index: -1;
         }
       }
     }
@@ -406,6 +581,9 @@ watch(isMuted, (val) => {
   border: none;
   font-weight: bold;
   font-size: 34px;
-  text-shadow: #d36833 1px 4px 1px;
+  /* prettier-ignore */
+  text-shadow: #d36833 1px 4px 1px, #d36833 1px 4px 1px;
+  /* prettier-ignore */
+  text-shadow: #d36833 -3PX -4PX 2PX, #d36833 3PX 5PX 1PX;
 }
 </style>

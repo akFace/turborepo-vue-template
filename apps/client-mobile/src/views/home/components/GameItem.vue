@@ -13,6 +13,12 @@
 </template>
 <script lang="ts" setup>
 import { reactive, ref } from 'vue';
+defineProps({
+  info: {
+    type: Object,
+    default: () => {},
+  },
+});
 </script>
 <style lang="scss" scoped>
 .game-item-card {
@@ -23,6 +29,8 @@ import { reactive, ref } from 'vue';
   background-color: #3c93fc;
   overflow: hidden;
   border-radius: 8px;
+  color: #fff;
+  line-height: normal;
   h2 {
     padding-top: 4px;
     padding-bottom: 6px;
@@ -44,6 +52,7 @@ import { reactive, ref } from 'vue';
       padding: 2px 8px;
       text-align: center;
       border-radius: 4px;
+      font-size: 12px;
       &.green {
         background-color: $green;
       }

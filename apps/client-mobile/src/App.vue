@@ -2,17 +2,25 @@
 import { RouterView } from 'vue-router';
 import { computed, onMounted } from 'vue';
 import { useGlobalStore } from '@/stores/global';
-import { useIm } from '@/stores/modules/Im';
+import { useMessage } from '@/stores/modules/message';
 const loading = computed(() => {
   return useGlobalStore().loading;
 });
 
-const im = useIm();
+const useTim = useMessage();
+
+const initTim = async () => {
+  const options = {
+    sdkAppId: '',
+    userId: '',
+    userSig: '',
+    channel: '',
+  };
+  await useTim.initTimClient(options);
+};
 
 onMounted(() => {
-  // im.initWebSocket({
-  //   userId: '244343',
-  // });
+  // initTim();
 });
 </script>
 <template>

@@ -1,3 +1,7 @@
+/***
+ * 自定义websocket相关
+ * TODO 该文件暂时不用了
+ */
 import { defineStore, StateTree, _GettersTree } from 'pinia';
 import Ws from '@/plugins/socket/ws';
 import config from '@/config';

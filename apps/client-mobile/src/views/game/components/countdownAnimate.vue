@@ -32,7 +32,7 @@ const initAnimate = () => {
       emits('finish', timeoutNum.value);
       return;
     }
-  }, 1000);
+  }, 700);
 };
 
 watch(
@@ -52,7 +52,7 @@ watch(
   font-size: 45px;
   transform: scale(0);
   opacity: 0;
-  transition: all 0.3s;
+  transition: all 0.2s;
   &.active {
     opacity: 1;
     transform: scale(1);
