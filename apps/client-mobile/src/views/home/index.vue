@@ -5,18 +5,15 @@
       <div class="user-info">
         <div class="user-head" @click="doShowDialog">
           <div class="user-img">
-            <img
-              src="https://img0.baidu.com/it/u=2703585149,4271457684&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
-              alt=""
-            />
+            <img :src="userInfo?.avatar || defaultHead" alt="" />
           </div>
           <div class="user-name">
-            <div class="name">分而奋斗</div>
-            <div class="user-id">23232</div>
+            <div class="name">{{ userInfo?.name }}</div>
+            <div class="user-id">{{ userInfo?.id }}</div>
           </div>
         </div>
         <div class="user-btn" @click="showPopup = true">
-          <span class="coin-num">232343</span>
+          <span class="coin-num">{{ userInfo?.coinNum }}</span>
         </div>
       </div>
       <div class="notice-box">
@@ -62,12 +59,6 @@
         >
           <game-item :info="item" />
         </van-cell>
-        <van-cell class="game-item">
-          <game-item />
-        </van-cell>
-        <van-cell class="game-item">
-          <game-item />
-        </van-cell>
       </div>
     </van-list>
     <exchangePopup v-model:show="showPopup" />
@@ -81,10 +72,11 @@ import exchangePopup from '@/components/pay/exchangePopup.vue';
 import { showDialog } from '@/components/common/dialog/index';
 import iconCoin from '@/assets/image/icon/ic_coin.svg';
 import iconRank from '@/assets/image/icon/icon-rank.svg';
-import {
-  getApiFinanceMachines,
-  GetApiFinanceMachinesResponse,
-} from '@/services';
+import { getMachines, GetMachinesResponse } from '@/services';
+import { useUser } from '@/stores/modules/user';
+import defaultHead from '@/assets/image/default-head.jpg';
+
+const { userInfo } = useUser();
 
 const showPopup = ref(false);
 const loading = ref(false);
@@ -94,7 +86,7 @@ let pageInfo = reactive<
   {
     pageSize: number;
     pageNum: number;
-  } & GetApiFinanceMachinesResponse
+  } & GetMachinesResponse
 >({
   pageSize: 20,
   pageNum: 0,
@@ -121,7 +113,7 @@ const onLoad = async () => {
   loading.value = true;
   finished.value = false;
   pageInfo.pageNum++;
-  getApiFinanceMachines({
+  getMachines({
     pageSize: pageInfo.pageSize as any,
     pageNum: pageInfo.pageNum as any,
   })

@@ -5,6 +5,7 @@ import { showToast } from '@shixiyi/utils';
 import { useGlobalStore } from '@/stores/global';
 import { STATUS_CODE } from '@/utils/constant';
 
+const isDev = import.meta.env.DEV;
 export interface RequestOptions {
   /**
    * 使用的服务器。
@@ -29,7 +30,7 @@ let showErrorMsg = true;
 let useOptions: RequestOptions | null = null;
 
 const axiosRequest = axios.create({
-  baseURL: '',
+  baseURL: isDev ? '/api' : '',
   timeout: 15000,
   headers: {
     'Content-Type': 'application/json; charset=utf-8',
@@ -51,7 +52,7 @@ axiosRequest.interceptors.request.use(
       ...config,
       headers: {
         ...headers,
-        Authorization: localStorage.getItem('Authorization'),
+        Authorization: localStorage.getItem('Authorization') || `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpZCI6MSwibmFtZSI6IuWwj-i0sSIsImF2YXRhciI6IiIsImN1c3RvbUlkIjoxLCJjdXN0b21OYW1lIjoi5aix5LmQ5YWs5Y-4IiwidGhpcmRVc2VySWQiOiIxMDAwIn0.21FFrx87DWEqa9X9y10nBFrJOMmldUZJXTfNW9--MpFexxqmMcYcAXis7IUdhyc_i_7pqNpUWi9qHGISs3dE_Q`,
         'Language-Type': getLangType(),
         'Cache-Control': 'no-cache',
       },

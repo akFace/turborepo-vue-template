@@ -3,11 +3,13 @@ import { RouterView } from 'vue-router';
 import { computed, onMounted } from 'vue';
 import { useGlobalStore } from '@/stores/global';
 import { useMessage } from '@/stores/modules/message';
+import { useUser } from '@/stores/modules/user';
 const loading = computed(() => {
   return useGlobalStore().loading;
 });
 
 const useTim = useMessage();
+const { getUserInfoByApi } = useUser();
 
 const initTim = async () => {
   const options = {
@@ -21,6 +23,7 @@ const initTim = async () => {
 
 onMounted(() => {
   // initTim();
+  getUserInfoByApi();
 });
 </script>
 <template>

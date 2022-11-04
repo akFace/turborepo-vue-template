@@ -2,7 +2,7 @@ import request from "/@/utils/request";
 //登录
 export function loginRelApi(data: object) {
   return request({
-    url: "/finance/login",
+    url: "/login",
     method: "post",
     data
   });
@@ -11,7 +11,7 @@ export function loginRelApi(data: object) {
 /** 刷新token */
 export const refreshToken = (data: object) => {
   return request({
-    url: "/finance/token/refresh",
+    url: "/token/refresh",
     method: "post",
     data
   });
@@ -20,7 +20,7 @@ export const refreshToken = (data: object) => {
 /** 用户管理列表 */
 export const getFinanceUser = (params: object) => {
   return request({
-    url: "/finance/user",
+    url: "/user",
     method: "get",
     params
   });
@@ -29,7 +29,7 @@ export const getFinanceUser = (params: object) => {
 /** 修改用户状态 */
 export const patchFinanceUser = (data: object) => {
   return request({
-    url: "/finance/user",
+    url: "/user",
     method: "patch",
     data
   });
@@ -38,7 +38,7 @@ export const patchFinanceUser = (data: object) => {
 /** 用户金币信息 */
 export const getFinanceUserCoinInfo = (params: object) => {
   return request({
-    url: "/finance/user/userCoinInfo",
+    url: "/user/userCoinInfo",
     method: "get",
     params
   });
@@ -47,7 +47,7 @@ export const getFinanceUserCoinInfo = (params: object) => {
 /** 用户金币记录列表 */
 export const getFinanceUserCoinRecord = (params: object) => {
   return request({
-    url: "/finance/user/userCoinRecord",
+    url: "/user/userCoinRecord",
     method: "get",
     params
   });

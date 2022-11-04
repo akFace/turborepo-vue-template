@@ -13,11 +13,12 @@ export default defineConfig({
     open: false,
     host: '0.0.0.0',
     proxy: {
-      '/api/': {
+      '/api': {
         // target: 'http://43.129.181.111',
-        target: 'http://192.168.0.38:8001',
+        target: 'http://1.12.239.170:10002',
         // target: 'http://livestream.inet',
         changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
   },

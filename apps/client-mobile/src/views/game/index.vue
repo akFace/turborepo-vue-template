@@ -164,9 +164,11 @@ import {
 } from '@shixiyi/im-core';
 import { useGlobalStore } from '@/stores/global';
 import {
-  postApiFinanceMachinesLogin,
-  postApiFinanceMachinesPlay,
-  postApiFinanceMachinesSwing,
+  postMachinesLogin,
+  postMachinesPlay,
+  postMachinesSwing,
+  getMachinesId,
+  GetMachinesIdResponse,
 } from '@/services';
 import {
   MACHINE_OPERATE_TYPE,
@@ -174,6 +176,7 @@ import {
   STATUS_CODE,
 } from '@/utils/constant';
 import { useMessage } from '@/stores/modules/message';
+import { useRoute } from 'vue-router';
 const LivePlayer = ref<InstanceType<typeof Player>>();
 const coinAnimateUpdate = ref<InstanceType<typeof coinAnimate>>();
 const showchargePopup = ref(false);
@@ -187,7 +190,7 @@ const isMuted = ref(true);
 const buttonStatus = ref(MACHINE_PLAYER_STATUS.INIT); // 默认空闲状态
 const loginMachineInfo = ref<any>(null);
 const playerUrl = computed(() => {
-  return 'https://1500005692.vod2.myqcloud.com/43843706vodtranscq1500005692/62656d94387702300542496289/v.f100240.m3u8'; // 'webrtc://saas-live-pull.xiehou360.com/live/1018test?txSecret=91cacd32dc42d59c13191b01c0b34714&txTime=635CECE2';
+  return gameInfo.value?.pullUrl; // 'webrtc://saas-live-pull.xiehou360.com/live/1018test?txSecret=91cacd32dc42d59c13191b01c0b34714&txTime=635CECE2';
 });
 
 let TimClient: IMClient | null = null;
@@ -199,6 +202,17 @@ const { showLoading, hideLoading } = useGlobalStore();
 const isloginTim = computed(() => {
   return useMessage().isLoginIm;
 });
+
+const route = useRoute();
+const gameId = computed(() => {
+  return route.params.id as string;
+});
+
+const machineId = computed(() => {
+  return gameInfo.value?.machineId as number;
+});
+
+const gameInfo = ref<GetMachinesIdResponse['info']>({});
 
 watch(
   isloginTim,
@@ -248,8 +262,8 @@ const onLongpress = () => {
 // 登录机器
 const loginMachine = async () => {
   try {
-    const params = { machineId: 23211 };
-    const res: any = await postApiFinanceMachinesLogin(params, {
+    const params = { machineId: machineId.value };
+    const res: any = await postMachinesLogin(params, {
       showLoading: true,
       showErrorMsg: false,
       hasResolve: true,
@@ -269,16 +283,17 @@ const loginMachine = async () => {
 // 开始投币
 const playGame = async () => {
   showCountdownAnimate.value = false;
-  const res = await postApiFinanceMachinesPlay({
-    machineId: 23211,
+  const res = await postMachinesPlay({
+    machineId: machineId.value,
+    operateId: loginMachineInfo.value?.operateId,
   });
   setCountdown();
 };
 // 摇摆
 const playSwing = async () => {
-  const res = await postApiFinanceMachinesSwing(
+  const res = await postMachinesSwing(
     {
-      machineId: 23211,
+      machineId: machineId.value,
       operateId: loginMachineInfo.value?.operateId,
     },
     {
@@ -310,8 +325,9 @@ const autoPlay = () => {
   buttonStatus.value = MACHINE_PLAYER_STATUS.AUTO_PLAY;
   autoPlayTimer = setInterval(() => {
     // 循环调用投币接口
-    postApiFinanceMachinesPlay({
-      machineId: 23211,
+    postMachinesPlay({
+      machineId: machineId.value,
+      operateId: loginMachineInfo.value?.operateId,
     });
   }, 300);
 };
@@ -337,6 +353,13 @@ watch(isMuted, (val) => {
   } else {
     LivePlayer.value?.setVolume(70);
   }
+});
+onMounted(() => {
+  getMachinesId({
+    id: gameId.value,
+  }).then(({ info }: any) => {
+    gameInfo.value = info;
+  });
 });
 </script>
 <style lang="scss" scoped>

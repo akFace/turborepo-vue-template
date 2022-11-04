@@ -3,10 +3,11 @@ import { ElMessage, ElMessageBox } from "element-plus";
 import { useUserStore } from "../store/modules/user";
 import { closeLoading, showLoading } from "/@/plugins/loading";
 import { STAUS_CODE } from "/@/utils/constant";
+const isDev = import.meta.env.DEV;
 
 // create an axios instance
 const service = axios.create({
-  baseURL: "/api", // url = base url + request url
+  baseURL: isDev ? "/api" : "", // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 30000 // request timeout
 });

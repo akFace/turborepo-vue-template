@@ -32,13 +32,13 @@ const prodUrl_0_0_0_1 = '' as any;
 const dataKey_0_0_0_1 = 'data' as any;
 
 /**
- * 接口 [机器列表↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14953) 的 **请求类型**
+ * 接口 [机器列表↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15145) 的 **请求类型**
  *
- * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1067)
- * @请求头 `GET /api/finance/machines`
- * @更新时间 `2022-11-03 09:47:47`
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `GET /machines`
+ * @更新时间 `2022-11-04 14:43:09`
  */
-export interface GetApiFinanceMachinesRequest {
+export interface GetMachinesRequest {
   /**
    * 页码
    */
@@ -50,13 +50,13 @@ export interface GetApiFinanceMachinesRequest {
 }
 
 /**
- * 接口 [机器列表↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14953) 的 **返回类型**
+ * 接口 [机器列表↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15145) 的 **返回类型**
  *
- * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1067)
- * @请求头 `GET /api/finance/machines`
- * @更新时间 `2022-11-03 09:47:47`
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `GET /machines`
+ * @更新时间 `2022-11-04 14:43:09`
  */
-export interface GetApiFinanceMachinesResponse {
+export interface GetMachinesResponse {
   /**
    * 返回结果列表
    */
@@ -72,9 +72,9 @@ export interface GetApiFinanceMachinesResponse {
      */
     status?: number;
     /**
-     * 推流地址
+     * 拉流地址
      */
-    pushUrl?: string;
+    pullUrl?: string;
     /**
      * 每次投币消费金币数
      */
@@ -142,18 +142,18 @@ export interface GetApiFinanceMachinesResponse {
 }
 
 /**
- * 接口 [机器列表↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14953) 的 **请求配置的类型**
+ * 接口 [机器列表↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15145) 的 **请求配置的类型**
  *
- * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1067)
- * @请求头 `GET /api/finance/machines`
- * @更新时间 `2022-11-03 09:47:47`
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `GET /machines`
+ * @更新时间 `2022-11-04 14:43:09`
  */
-type GetApiFinanceMachinesRequestConfig = Readonly<
+type GetMachinesRequestConfig = Readonly<
   RequestConfig<
     'http://yapi.fruitmedia-hk.com/mock/95',
     '',
     '',
-    '/api/finance/machines',
+    '/machines',
     'data',
     string,
     'pageNum' | 'pageSize',
@@ -162,17 +162,17 @@ type GetApiFinanceMachinesRequestConfig = Readonly<
 >;
 
 /**
- * 接口 [机器列表↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14953) 的 **请求配置**
+ * 接口 [机器列表↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15145) 的 **请求配置**
  *
- * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1067)
- * @请求头 `GET /api/finance/machines`
- * @更新时间 `2022-11-03 09:47:47`
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `GET /machines`
+ * @更新时间 `2022-11-04 14:43:09`
  */
-const getApiFinanceMachinesRequestConfig: GetApiFinanceMachinesRequestConfig = /*#__PURE__*/ {
+const getMachinesRequestConfig: GetMachinesRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_1,
   devUrl: devUrl_0_0_0_1,
   prodUrl: prodUrl_0_0_0_1,
-  path: '/api/finance/machines',
+  path: '/machines',
   method: Method.GET,
   requestHeaders: {Authorization: ''},
   requestBodyType: RequestBodyType.query,
@@ -183,35 +183,32 @@ const getApiFinanceMachinesRequestConfig: GetApiFinanceMachinesRequestConfig = /
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'getApiFinanceMachines',
+  requestFunctionName: 'getMachines',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 };
 
 /**
- * 接口 [机器列表↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14953) 的 **请求函数**
+ * 接口 [机器列表↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15145) 的 **请求函数**
  *
- * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1067)
- * @请求头 `GET /api/finance/machines`
- * @更新时间 `2022-11-03 09:47:47`
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `GET /machines`
+ * @更新时间 `2022-11-04 14:43:09`
  */
-export const getApiFinanceMachines = /*#__PURE__*/ (
-  requestData: GetApiFinanceMachinesRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<GetApiFinanceMachinesResponse>(prepare(getApiFinanceMachinesRequestConfig, requestData), ...args);
+export const getMachines = /*#__PURE__*/ (requestData: GetMachinesRequest, ...args: UserRequestRestArgs) => {
+  return request<GetMachinesResponse>(prepare(getMachinesRequestConfig, requestData), ...args);
 };
 
-getApiFinanceMachines.requestConfig = getApiFinanceMachinesRequestConfig;
+getMachines.requestConfig = getMachinesRequestConfig;
 
 /**
- * 接口 [上机操作↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14969) 的 **请求类型**
+ * 接口 [上机操作↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15153) 的 **请求类型**
  *
- * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1067)
- * @请求头 `POST /api/finance/machines/login`
- * @更新时间 `2022-11-03 09:47:48`
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `POST /machines/login`
+ * @更新时间 `2022-11-04 14:43:09`
  */
-export interface PostApiFinanceMachinesLoginRequest {
+export interface PostMachinesLoginRequest {
   /**
    * 机器 id
    */
@@ -219,13 +216,13 @@ export interface PostApiFinanceMachinesLoginRequest {
 }
 
 /**
- * 接口 [上机操作↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14969) 的 **返回类型**
+ * 接口 [上机操作↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15153) 的 **返回类型**
  *
- * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1067)
- * @请求头 `POST /api/finance/machines/login`
- * @更新时间 `2022-11-03 09:47:48`
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `POST /machines/login`
+ * @更新时间 `2022-11-04 14:43:09`
  */
-export interface PostApiFinanceMachinesLoginResponse {
+export interface PostMachinesLoginResponse {
   /**
    * 响应实体
    */
@@ -241,37 +238,28 @@ export interface PostApiFinanceMachinesLoginResponse {
 }
 
 /**
- * 接口 [上机操作↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14969) 的 **请求配置的类型**
+ * 接口 [上机操作↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15153) 的 **请求配置的类型**
  *
- * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1067)
- * @请求头 `POST /api/finance/machines/login`
- * @更新时间 `2022-11-03 09:47:48`
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `POST /machines/login`
+ * @更新时间 `2022-11-04 14:43:09`
  */
-type PostApiFinanceMachinesLoginRequestConfig = Readonly<
-  RequestConfig<
-    'http://yapi.fruitmedia-hk.com/mock/95',
-    '',
-    '',
-    '/api/finance/machines/login',
-    'data',
-    string,
-    string,
-    false
-  >
+type PostMachinesLoginRequestConfig = Readonly<
+  RequestConfig<'http://yapi.fruitmedia-hk.com/mock/95', '', '', '/machines/login', 'data', string, string, false>
 >;
 
 /**
- * 接口 [上机操作↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14969) 的 **请求配置**
+ * 接口 [上机操作↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15153) 的 **请求配置**
  *
- * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1067)
- * @请求头 `POST /api/finance/machines/login`
- * @更新时间 `2022-11-03 09:47:48`
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `POST /machines/login`
+ * @更新时间 `2022-11-04 14:43:09`
  */
-const postApiFinanceMachinesLoginRequestConfig: PostApiFinanceMachinesLoginRequestConfig = /*#__PURE__*/ {
+const postMachinesLoginRequestConfig: PostMachinesLoginRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_1,
   devUrl: devUrl_0_0_0_1,
   prodUrl: prodUrl_0_0_0_1,
-  path: '/api/finance/machines/login',
+  path: '/machines/login',
   method: Method.POST,
   requestHeaders: {Authorization: ''},
   requestBodyType: RequestBodyType.json,
@@ -282,38 +270,35 @@ const postApiFinanceMachinesLoginRequestConfig: PostApiFinanceMachinesLoginReque
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'postApiFinanceMachinesLogin',
+  requestFunctionName: 'postMachinesLogin',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 };
 
 /**
- * 接口 [上机操作↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14969) 的 **请求函数**
+ * 接口 [上机操作↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15153) 的 **请求函数**
  *
- * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1067)
- * @请求头 `POST /api/finance/machines/login`
- * @更新时间 `2022-11-03 09:47:48`
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `POST /machines/login`
+ * @更新时间 `2022-11-04 14:43:09`
  */
-export const postApiFinanceMachinesLogin = /*#__PURE__*/ (
-  requestData: PostApiFinanceMachinesLoginRequest,
+export const postMachinesLogin = /*#__PURE__*/ (
+  requestData: PostMachinesLoginRequest,
   ...args: UserRequestRestArgs
 ) => {
-  return request<PostApiFinanceMachinesLoginResponse>(
-    prepare(postApiFinanceMachinesLoginRequestConfig, requestData),
-    ...args,
-  );
+  return request<PostMachinesLoginResponse>(prepare(postMachinesLoginRequestConfig, requestData), ...args);
 };
 
-postApiFinanceMachinesLogin.requestConfig = postApiFinanceMachinesLoginRequestConfig;
+postMachinesLogin.requestConfig = postMachinesLoginRequestConfig;
 
 /**
- * 接口 [摇摆操作↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14977) 的 **请求类型**
+ * 接口 [摇摆操作↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15161) 的 **请求类型**
  *
- * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1067)
- * @请求头 `POST /api/finance/machines/swing`
- * @更新时间 `2022-11-03 09:47:48`
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `POST /machines/swing`
+ * @更新时间 `2022-11-04 14:43:10`
  */
-export interface PostApiFinanceMachinesSwingRequest {
+export interface PostMachinesSwingRequest {
   /**
    * 机器 id
    */
@@ -325,13 +310,13 @@ export interface PostApiFinanceMachinesSwingRequest {
 }
 
 /**
- * 接口 [摇摆操作↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14977) 的 **返回类型**
+ * 接口 [摇摆操作↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15161) 的 **返回类型**
  *
- * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1067)
- * @请求头 `POST /api/finance/machines/swing`
- * @更新时间 `2022-11-03 09:47:48`
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `POST /machines/swing`
+ * @更新时间 `2022-11-04 14:43:10`
  */
-export interface PostApiFinanceMachinesSwingResponse {
+export interface PostMachinesSwingResponse {
   /**
    * 默认返回结果
    */
@@ -343,37 +328,28 @@ export interface PostApiFinanceMachinesSwingResponse {
 }
 
 /**
- * 接口 [摇摆操作↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14977) 的 **请求配置的类型**
+ * 接口 [摇摆操作↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15161) 的 **请求配置的类型**
  *
- * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1067)
- * @请求头 `POST /api/finance/machines/swing`
- * @更新时间 `2022-11-03 09:47:48`
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `POST /machines/swing`
+ * @更新时间 `2022-11-04 14:43:10`
  */
-type PostApiFinanceMachinesSwingRequestConfig = Readonly<
-  RequestConfig<
-    'http://yapi.fruitmedia-hk.com/mock/95',
-    '',
-    '',
-    '/api/finance/machines/swing',
-    'data',
-    string,
-    string,
-    false
-  >
+type PostMachinesSwingRequestConfig = Readonly<
+  RequestConfig<'http://yapi.fruitmedia-hk.com/mock/95', '', '', '/machines/swing', 'data', string, string, false>
 >;
 
 /**
- * 接口 [摇摆操作↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14977) 的 **请求配置**
+ * 接口 [摇摆操作↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15161) 的 **请求配置**
  *
- * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1067)
- * @请求头 `POST /api/finance/machines/swing`
- * @更新时间 `2022-11-03 09:47:48`
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `POST /machines/swing`
+ * @更新时间 `2022-11-04 14:43:10`
  */
-const postApiFinanceMachinesSwingRequestConfig: PostApiFinanceMachinesSwingRequestConfig = /*#__PURE__*/ {
+const postMachinesSwingRequestConfig: PostMachinesSwingRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_1,
   devUrl: devUrl_0_0_0_1,
   prodUrl: prodUrl_0_0_0_1,
-  path: '/api/finance/machines/swing',
+  path: '/machines/swing',
   method: Method.POST,
   requestHeaders: {Authorization: ''},
   requestBodyType: RequestBodyType.json,
@@ -384,56 +360,53 @@ const postApiFinanceMachinesSwingRequestConfig: PostApiFinanceMachinesSwingReque
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'postApiFinanceMachinesSwing',
+  requestFunctionName: 'postMachinesSwing',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 };
 
 /**
- * 接口 [摇摆操作↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14977) 的 **请求函数**
+ * 接口 [摇摆操作↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15161) 的 **请求函数**
  *
- * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1067)
- * @请求头 `POST /api/finance/machines/swing`
- * @更新时间 `2022-11-03 09:47:48`
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `POST /machines/swing`
+ * @更新时间 `2022-11-04 14:43:10`
  */
-export const postApiFinanceMachinesSwing = /*#__PURE__*/ (
-  requestData: PostApiFinanceMachinesSwingRequest,
+export const postMachinesSwing = /*#__PURE__*/ (
+  requestData: PostMachinesSwingRequest,
   ...args: UserRequestRestArgs
 ) => {
-  return request<PostApiFinanceMachinesSwingResponse>(
-    prepare(postApiFinanceMachinesSwingRequestConfig, requestData),
-    ...args,
-  );
+  return request<PostMachinesSwingResponse>(prepare(postMachinesSwingRequestConfig, requestData), ...args);
 };
 
-postApiFinanceMachinesSwing.requestConfig = postApiFinanceMachinesSwingRequestConfig;
+postMachinesSwing.requestConfig = postMachinesSwingRequestConfig;
 
 /**
- * 接口 [开始投币↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14985) 的 **请求类型**
+ * 接口 [投币↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15169) 的 **请求类型**
  *
- * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1067)
- * @请求头 `POST /api/finance/machines/play`
- * @更新时间 `2022-11-03 15:27:32`
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `POST /machines/play`
+ * @更新时间 `2022-11-04 14:43:10`
  */
-export interface PostApiFinanceMachinesPlayRequest {
+export interface PostMachinesPlayRequest {
   /**
    * 机器 id
    */
   machineId: number;
+  /**
+   * 操作 id
+   */
+  operateId: number;
 }
 
 /**
- * 接口 [开始投币↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14985) 的 **返回类型**
+ * 接口 [投币↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15169) 的 **返回类型**
  *
- * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1067)
- * @请求头 `POST /api/finance/machines/play`
- * @更新时间 `2022-11-03 15:27:32`
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `POST /machines/play`
+ * @更新时间 `2022-11-04 14:43:10`
  */
-export interface PostApiFinanceMachinesPlayResponse {
-  /**
-   * 响应实体
-   */
-  info?: number;
+export interface PostMachinesPlayResponse {
   /**
    * 默认返回结果
    */
@@ -445,37 +418,28 @@ export interface PostApiFinanceMachinesPlayResponse {
 }
 
 /**
- * 接口 [开始投币↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14985) 的 **请求配置的类型**
+ * 接口 [投币↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15169) 的 **请求配置的类型**
  *
- * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1067)
- * @请求头 `POST /api/finance/machines/play`
- * @更新时间 `2022-11-03 15:27:32`
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `POST /machines/play`
+ * @更新时间 `2022-11-04 14:43:10`
  */
-type PostApiFinanceMachinesPlayRequestConfig = Readonly<
-  RequestConfig<
-    'http://yapi.fruitmedia-hk.com/mock/95',
-    '',
-    '',
-    '/api/finance/machines/play',
-    'data',
-    string,
-    string,
-    false
-  >
+type PostMachinesPlayRequestConfig = Readonly<
+  RequestConfig<'http://yapi.fruitmedia-hk.com/mock/95', '', '', '/machines/play', 'data', string, string, false>
 >;
 
 /**
- * 接口 [开始投币↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14985) 的 **请求配置**
+ * 接口 [投币↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15169) 的 **请求配置**
  *
- * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1067)
- * @请求头 `POST /api/finance/machines/play`
- * @更新时间 `2022-11-03 15:27:32`
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `POST /machines/play`
+ * @更新时间 `2022-11-04 14:43:10`
  */
-const postApiFinanceMachinesPlayRequestConfig: PostApiFinanceMachinesPlayRequestConfig = /*#__PURE__*/ {
+const postMachinesPlayRequestConfig: PostMachinesPlayRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_1,
   devUrl: devUrl_0_0_0_1,
   prodUrl: prodUrl_0_0_0_1,
-  path: '/api/finance/machines/play',
+  path: '/machines/play',
   method: Method.POST,
   requestHeaders: {Authorization: ''},
   requestBodyType: RequestBodyType.json,
@@ -486,29 +450,219 @@ const postApiFinanceMachinesPlayRequestConfig: PostApiFinanceMachinesPlayRequest
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'postApiFinanceMachinesPlay',
+  requestFunctionName: 'postMachinesPlay',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 };
 
 /**
- * 接口 [开始投币↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14985) 的 **请求函数**
+ * 接口 [投币↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15169) 的 **请求函数**
  *
- * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1067)
- * @请求头 `POST /api/finance/machines/play`
- * @更新时间 `2022-11-03 15:27:32`
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `POST /machines/play`
+ * @更新时间 `2022-11-04 14:43:10`
  */
-export const postApiFinanceMachinesPlay = /*#__PURE__*/ (
-  requestData: PostApiFinanceMachinesPlayRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PostApiFinanceMachinesPlayResponse>(
-    prepare(postApiFinanceMachinesPlayRequestConfig, requestData),
-    ...args,
-  );
+export const postMachinesPlay = /*#__PURE__*/ (requestData: PostMachinesPlayRequest, ...args: UserRequestRestArgs) => {
+  return request<PostMachinesPlayResponse>(prepare(postMachinesPlayRequestConfig, requestData), ...args);
 };
 
-postApiFinanceMachinesPlay.requestConfig = postApiFinanceMachinesPlayRequestConfig;
+postMachinesPlay.requestConfig = postMachinesPlayRequestConfig;
+
+/**
+ * 接口 [机器详情↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15177) 的 **请求类型**
+ *
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `GET /machines/{id}`
+ * @更新时间 `2022-11-04 14:43:10`
+ */
+export interface GetMachinesIdRequest {
+  /**
+   * 机器ID
+   */
+  id: string;
+}
+
+/**
+ * 接口 [机器详情↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15177) 的 **返回类型**
+ *
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `GET /machines/{id}`
+ * @更新时间 `2022-11-04 14:43:10`
+ */
+export interface GetMachinesIdResponse {
+  /**
+   * 响应实体
+   */
+  info?: {
+    id?: number;
+    /**
+     * 机器名称
+     */
+    name?: string;
+    /**
+     * 类型 1-推币机
+     */
+    type?: number;
+    /**
+     * 状态 1-上架 2-占用 3-维修中 4-下架
+     */
+    status?: number;
+    /**
+     * 拉流地址
+     */
+    pullUrl?: string;
+    /**
+     * 每次投币消费金币数
+     */
+    cost?: number;
+    /**
+     * 第三方的机器id, 用于IM群组 groupId
+     */
+    machineId?: string;
+  };
+  /**
+   * 默认返回结果
+   */
+  tip?: string;
+  /**
+   * 默认状态码
+   */
+  code?: number;
+}
+
+/**
+ * 接口 [机器详情↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15177) 的 **请求配置的类型**
+ *
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `GET /machines/{id}`
+ * @更新时间 `2022-11-04 14:43:10`
+ */
+type GetMachinesIdRequestConfig = Readonly<
+  RequestConfig<'http://yapi.fruitmedia-hk.com/mock/95', '', '', '/machines/{id}', 'data', 'id', string, false>
+>;
+
+/**
+ * 接口 [机器详情↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15177) 的 **请求配置**
+ *
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `GET /machines/{id}`
+ * @更新时间 `2022-11-04 14:43:10`
+ */
+const getMachinesIdRequestConfig: GetMachinesIdRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/machines/{id}',
+  method: Method.GET,
+  requestHeaders: {Authorization: ''},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: ['id'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getMachinesId',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+};
+
+/**
+ * 接口 [机器详情↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15177) 的 **请求函数**
+ *
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `GET /machines/{id}`
+ * @更新时间 `2022-11-04 14:43:10`
+ */
+export const getMachinesId = /*#__PURE__*/ (requestData: GetMachinesIdRequest, ...args: UserRequestRestArgs) => {
+  return request<GetMachinesIdResponse>(prepare(getMachinesIdRequestConfig, requestData), ...args);
+};
+
+getMachinesId.requestConfig = getMachinesIdRequestConfig;
+
+/**
+ * 接口 [下机↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15185) 的 **请求类型**
+ *
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `POST /machines/logout`
+ * @更新时间 `2022-11-04 14:43:10`
+ */
+export interface PostMachinesLogoutRequest {
+  machineId: number;
+}
+
+/**
+ * 接口 [下机↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15185) 的 **返回类型**
+ *
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `POST /machines/logout`
+ * @更新时间 `2022-11-04 14:43:10`
+ */
+export interface PostMachinesLogoutResponse {
+  /**
+   * 默认返回结果
+   */
+  tip?: string;
+  /**
+   * 默认状态码
+   */
+  code?: number;
+}
+
+/**
+ * 接口 [下机↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15185) 的 **请求配置的类型**
+ *
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `POST /machines/logout`
+ * @更新时间 `2022-11-04 14:43:10`
+ */
+type PostMachinesLogoutRequestConfig = Readonly<
+  RequestConfig<'http://yapi.fruitmedia-hk.com/mock/95', '', '', '/machines/logout', 'data', string, string, false>
+>;
+
+/**
+ * 接口 [下机↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15185) 的 **请求配置**
+ *
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `POST /machines/logout`
+ * @更新时间 `2022-11-04 14:43:10`
+ */
+const postMachinesLogoutRequestConfig: PostMachinesLogoutRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/machines/logout',
+  method: Method.POST,
+  requestHeaders: {Authorization: ''},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postMachinesLogout',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+};
+
+/**
+ * 接口 [下机↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15185) 的 **请求函数**
+ *
+ * @分类 [机器相关的接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1079)
+ * @请求头 `POST /machines/logout`
+ * @更新时间 `2022-11-04 14:43:10`
+ */
+export const postMachinesLogout = /*#__PURE__*/ (
+  requestData: PostMachinesLogoutRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostMachinesLogoutResponse>(prepare(postMachinesLogoutRequestConfig, requestData), ...args);
+};
+
+postMachinesLogout.requestConfig = postMachinesLogoutRequestConfig;
 
 const mockUrl_0_0_0_2 = 'http://yapi.fruitmedia-hk.com/mock/95' as any;
 const devUrl_0_0_0_2 = '' as any;
@@ -516,22 +670,22 @@ const prodUrl_0_0_0_2 = '' as any;
 const dataKey_0_0_0_2 = 'data' as any;
 
 /**
- * 接口 [平台用户的相关数据查询↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14993) 的 **请求类型**
+ * 接口 [平台用户的相关数据查询↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15193) 的 **请求类型**
  *
- * @分类 [用户相关接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1071)
- * @请求头 `GET /api/finance/users/info`
- * @更新时间 `2022-11-03 09:47:49`
+ * @分类 [用户相关接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1083)
+ * @请求头 `GET /users/info`
+ * @更新时间 `2022-11-04 14:43:10`
  */
-export interface GetApiFinanceUsersInfoRequest {}
+export interface GetUsersInfoRequest {}
 
 /**
- * 接口 [平台用户的相关数据查询↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14993) 的 **返回类型**
+ * 接口 [平台用户的相关数据查询↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15193) 的 **返回类型**
  *
- * @分类 [用户相关接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1071)
- * @请求头 `GET /api/finance/users/info`
- * @更新时间 `2022-11-03 09:47:49`
+ * @分类 [用户相关接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1083)
+ * @请求头 `GET /users/info`
+ * @更新时间 `2022-11-04 14:43:10`
  */
-export interface GetApiFinanceUsersInfoResponse {
+export interface GetUsersInfoResponse {
   /**
    * 响应实体
    */
@@ -555,7 +709,7 @@ export interface GetApiFinanceUsersInfoResponse {
     /**
      * 企业 id
      */
-    customId?: string;
+    customId?: number;
     /**
      * 企业名字
      */
@@ -573,37 +727,28 @@ export interface GetApiFinanceUsersInfoResponse {
 }
 
 /**
- * 接口 [平台用户的相关数据查询↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14993) 的 **请求配置的类型**
+ * 接口 [平台用户的相关数据查询↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15193) 的 **请求配置的类型**
  *
- * @分类 [用户相关接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1071)
- * @请求头 `GET /api/finance/users/info`
- * @更新时间 `2022-11-03 09:47:49`
+ * @分类 [用户相关接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1083)
+ * @请求头 `GET /users/info`
+ * @更新时间 `2022-11-04 14:43:10`
  */
-type GetApiFinanceUsersInfoRequestConfig = Readonly<
-  RequestConfig<
-    'http://yapi.fruitmedia-hk.com/mock/95',
-    '',
-    '',
-    '/api/finance/users/info',
-    'data',
-    string,
-    string,
-    true
-  >
+type GetUsersInfoRequestConfig = Readonly<
+  RequestConfig<'http://yapi.fruitmedia-hk.com/mock/95', '', '', '/users/info', 'data', string, string, true>
 >;
 
 /**
- * 接口 [平台用户的相关数据查询↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14993) 的 **请求配置**
+ * 接口 [平台用户的相关数据查询↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15193) 的 **请求配置**
  *
- * @分类 [用户相关接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1071)
- * @请求头 `GET /api/finance/users/info`
- * @更新时间 `2022-11-03 09:47:49`
+ * @分类 [用户相关接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1083)
+ * @请求头 `GET /users/info`
+ * @更新时间 `2022-11-04 14:43:10`
  */
-const getApiFinanceUsersInfoRequestConfig: GetApiFinanceUsersInfoRequestConfig = /*#__PURE__*/ {
+const getUsersInfoRequestConfig: GetUsersInfoRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_2,
   devUrl: devUrl_0_0_0_2,
   prodUrl: prodUrl_0_0_0_2,
-  path: '/api/finance/users/info',
+  path: '/users/info',
   method: Method.GET,
   requestHeaders: {Authorization: ''},
   requestBodyType: RequestBodyType.query,
@@ -614,25 +759,100 @@ const getApiFinanceUsersInfoRequestConfig: GetApiFinanceUsersInfoRequestConfig =
   requestDataOptional: true,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'getApiFinanceUsersInfo',
+  requestFunctionName: 'getUsersInfo',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 };
 
 /**
- * 接口 [平台用户的相关数据查询↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/14993) 的 **请求函数**
+ * 接口 [平台用户的相关数据查询↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15193) 的 **请求函数**
  *
- * @分类 [用户相关接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1071)
- * @请求头 `GET /api/finance/users/info`
- * @更新时间 `2022-11-03 09:47:49`
+ * @分类 [用户相关接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1083)
+ * @请求头 `GET /users/info`
+ * @更新时间 `2022-11-04 14:43:10`
  */
-export const getApiFinanceUsersInfo = /*#__PURE__*/ (
-  requestData?: GetApiFinanceUsersInfoRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<GetApiFinanceUsersInfoResponse>(prepare(getApiFinanceUsersInfoRequestConfig, requestData), ...args);
+export const getUsersInfo = /*#__PURE__*/ (requestData?: GetUsersInfoRequest, ...args: UserRequestRestArgs) => {
+  return request<GetUsersInfoResponse>(prepare(getUsersInfoRequestConfig, requestData), ...args);
 };
 
-getApiFinanceUsersInfo.requestConfig = getApiFinanceUsersInfoRequestConfig;
+getUsersInfo.requestConfig = getUsersInfoRequestConfig;
+
+/**
+ * 接口 [用户开始游戏↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15201) 的 **请求类型**
+ *
+ * @分类 [用户相关接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1083)
+ * @请求头 `POST /users/login`
+ * @更新时间 `2022-11-04 14:43:11`
+ */
+export interface PostUsersLoginRequest {}
+
+/**
+ * 接口 [用户开始游戏↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15201) 的 **返回类型**
+ *
+ * @分类 [用户相关接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1083)
+ * @请求头 `POST /users/login`
+ * @更新时间 `2022-11-04 14:43:11`
+ */
+export interface PostUsersLoginResponse {
+  /**
+   * 默认返回结果
+   */
+  tip?: string;
+  /**
+   * 默认状态码
+   */
+  code?: number;
+}
+
+/**
+ * 接口 [用户开始游戏↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15201) 的 **请求配置的类型**
+ *
+ * @分类 [用户相关接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1083)
+ * @请求头 `POST /users/login`
+ * @更新时间 `2022-11-04 14:43:11`
+ */
+type PostUsersLoginRequestConfig = Readonly<
+  RequestConfig<'http://yapi.fruitmedia-hk.com/mock/95', '', '', '/users/login', 'data', string, string, true>
+>;
+
+/**
+ * 接口 [用户开始游戏↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15201) 的 **请求配置**
+ *
+ * @分类 [用户相关接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1083)
+ * @请求头 `POST /users/login`
+ * @更新时间 `2022-11-04 14:43:11`
+ */
+const postUsersLoginRequestConfig: PostUsersLoginRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
+  path: '/users/login',
+  method: Method.POST,
+  requestHeaders: {Authorization: ''},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_2,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: true,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postUsersLogin',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+};
+
+/**
+ * 接口 [用户开始游戏↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/15201) 的 **请求函数**
+ *
+ * @分类 [用户相关接口↗](http://yapi.fruitmedia-hk.com/project/95/interface/api/cat_1083)
+ * @请求头 `POST /users/login`
+ * @更新时间 `2022-11-04 14:43:11`
+ */
+export const postUsersLogin = /*#__PURE__*/ (requestData?: PostUsersLoginRequest, ...args: UserRequestRestArgs) => {
+  return request<PostUsersLoginResponse>(prepare(postUsersLoginRequestConfig, requestData), ...args);
+};
+
+postUsersLogin.requestConfig = postUsersLoginRequestConfig;
 
 /* prettier-ignore-end */

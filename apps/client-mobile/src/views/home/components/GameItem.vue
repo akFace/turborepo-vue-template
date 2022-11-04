@@ -1,24 +1,32 @@
 <template>
-  <div class="game-item-card">
-    <h2>金币游戏1</h2>
+  <div class="game-item-card" @click="jumpToDetail(info)">
+    <h2>{{ info.name }}</h2>
     <div class="game-cover">
-      <div class="game-status green">空闲中</div>
+      <div class="game-status green">
+        {{ getMachineStatusName(info.status) }}
+      </div>
       <img src="@/assets/image/home/game_cover@2x.png" alt="" />
     </div>
     <div class="btn">
       <img class="icon-coin" src="@/assets/image/game/ic_coins@2x.png" alt="" />
-      <span>2幣/次</span>
+      <span>{{ info.cost }}幣/次</span>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
 import { reactive, ref } from 'vue';
+import { getMachineStatusName } from '@/utils/filters';
+import { useRouter } from 'vue-router';
 defineProps({
   info: {
     type: Object,
     default: () => {},
   },
 });
+const router = useRouter();
+const jumpToDetail = (info: any) => {
+  router.push(`/game/${info.id}`);
+};
 </script>
 <style lang="scss" scoped>
 .game-item-card {
