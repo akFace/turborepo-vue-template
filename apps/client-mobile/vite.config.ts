@@ -15,7 +15,7 @@ export default defineConfig({
     proxy: {
       '/api/': {
         // target: 'http://43.129.181.111',
-        target: 'https://m.fruitmedia-hk.com',
+        target: 'http://192.168.0.38:8001',
         // target: 'http://livestream.inet',
         changeOrigin: true,
       },

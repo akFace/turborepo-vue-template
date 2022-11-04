@@ -6,12 +6,7 @@
     </div>
     <section>
       <slot name="left"></slot>
-      <div
-        class="export"
-        v-if="showExport"
-        v-permission="exportKey"
-        @click="exportExcet"
-      >
+      <div class="export" v-if="showExport" @click="exportExcet">
         <i class="iconfont icon-page_icon_export"></i
         >{{ $t("common.exportExcel") }}
       </div>
@@ -22,7 +17,7 @@
         class="icon"
         :class="{
           expand: expand,
-          unexpand: !expand,
+          unexpand: !expand
         }"
         @click="checkExpand"
       >
@@ -41,12 +36,12 @@ export default {
     showTitle: { type: Boolean, default: true },
     export: { type: Boolean, default: false },
     exportKey: { type: String, default: "" },
-    exportExcet: { type: Function, default: null },
+    exportExcet: { type: Function, default: null }
   },
   data() {
     return {
       expand: true,
-      showExport: this.export,
+      showExport: this.export
     };
   },
 
@@ -54,8 +49,8 @@ export default {
     checkExpand() {
       this.expand = !this.expand;
       this.changeExpand(this.expand);
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

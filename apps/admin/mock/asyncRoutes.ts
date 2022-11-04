@@ -41,12 +41,12 @@ export default [
       if (query.name === "admin") {
         return {
           code: 0,
-          info: [setDifAuthority("v-admin", permissionRouter)]
+          info: [] // [setDifAuthority("v-admin", permissionRouter)]
         };
       } else {
         return {
           code: 0,
-          info: [setDifAuthority("v-test", permissionRouter)]
+          info: [] // [setDifAuthority("v-test", permissionRouter)]
         };
       }
     }

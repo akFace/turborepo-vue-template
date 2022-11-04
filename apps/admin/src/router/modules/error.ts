@@ -7,7 +7,8 @@ const errorRouter: RouteConfigsTable = {
   meta: {
     icon: "information-line",
     title: $t("menus.hserror"),
-    rank: 9
+    rank: 9,
+    showLink: false
   },
   children: [
     {
@@ -15,7 +16,8 @@ const errorRouter: RouteConfigsTable = {
       name: "403",
       component: () => import("/@/views/error/403.vue"),
       meta: {
-        title: $t("menus.hsfourZeroOne")
+        title: $t("menus.hsfourZeroOne"),
+        showLink: false
       }
     },
     {
@@ -23,7 +25,8 @@ const errorRouter: RouteConfigsTable = {
       name: "404",
       component: () => import("/@/views/error/404.vue"),
       meta: {
-        title: $t("menus.hsfourZeroFour")
+        title: $t("menus.hsfourZeroFour"),
+        showLink: false
       }
     },
     {
@@ -31,7 +34,8 @@ const errorRouter: RouteConfigsTable = {
       name: "500",
       component: () => import("/@/views/error/500.vue"),
       meta: {
-        title: $t("menus.hsFive")
+        title: $t("menus.hsFive"),
+        showLink: false
       }
     }
   ]

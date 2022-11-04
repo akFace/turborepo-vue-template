@@ -101,62 +101,63 @@ i {
   padding-bottom: calc(20px + env(safe-area-inset-bottom));
 }
 
-.van-dialog--round-button .van-dialog__content .van-dialog__message {
-  font-size: 20px;
-  color: #fa3860;
-  text-shadow: 0px 0px 2px #fff;
-  font-weight: 700;
-}
+#app {
+  .van-dialog--round-button .van-dialog__content .van-dialog__message {
+    font-size: 20px;
+    color: #fa3860;
+    text-shadow: 0px 0px 2px #fff;
+    font-weight: 700;
+  }
 
-.van-dialog--round-button .van-dialog__header {
-  color: #fff;
-  font-size: 14px;
-}
-.van-dialog--round-button .van-action-bar .van-dialog__confirm,
-.van-dialog--round-button .van-action-bar .van-dialog__cancel {
-  position: relative;
-  color: #83280e;
-  background: linear-gradient(360deg, #f9b809 0%, #fad302 100%);
-  box-shadow: 0px 1px 0 0px rgba(255, 255, 255, 0.5) inset,
-    0px -3px 1px 0px #f57813 inset;
-  &::after {
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 28px;
-    height: 23px;
-    display: block;
-    content: '';
-    background: url('../image/icon/icon-btn.svg') no-repeat;
+  .van-dialog--round-button .van-dialog__header {
+    color: #fff;
+    font-size: 14px;
+  }
+  .van-dialog--round-button .van-action-bar .van-dialog__confirm,
+  .van-dialog--round-button .van-action-bar .van-dialog__cancel {
+    position: relative;
+    color: #83280e;
+    background: linear-gradient(360deg, #f9b809 0%, #fad302 100%);
+    box-shadow: 0px 1px 0 0px rgba(255, 255, 255, 0.5) inset,
+      0px -3px 1px 0px #f57813 inset;
+    &::after {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 28px;
+      height: 23px;
+      display: block;
+      content: '';
+      background: url('../image/icon/icon-btn.svg') no-repeat;
+    }
+  }
+
+  .van-button--primary {
+    background: linear-gradient(360deg, #f9b809 0%, #fad302 100%);
+    border-radius: 8px;
+    box-shadow: 0px 1px 3px 0px rgba(255, 255, 255, 0.5) inset,
+      0px -3px 1px 0px #f57813 inset;
+    border: none;
+    font-weight: 600;
+    &::after {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 28px;
+      height: 23px;
+      display: block;
+      content: '';
+      background: url('../image/icon/icon-btn.svg') no-repeat;
+    }
+  }
+
+  .vant-popup-box {
+    background-color: $secBgColor !important;
+    border-radius: 8px 8px 0px 0px;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5),
+      0px 1px 1px 0px rgba(255, 255, 255, 0.5) inset;
   }
 }
-
-.van-button--primary {
-  background: linear-gradient(360deg, #f9b809 0%, #fad302 100%);
-  border-radius: 8px;
-  box-shadow: 0px 1px 3px 0px rgba(255, 255, 255, 0.5) inset,
-    0px -3px 1px 0px #f57813 inset;
-  border: none;
-  font-weight: 600;
-  &::after {
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 28px;
-    height: 23px;
-    display: block;
-    content: '';
-    background: url('../image/icon/icon-btn.svg') no-repeat;
-  }
-}
-
-.vant-popup-box {
-  background-color: $secBgColor !important;
-  border-radius: 8px 8px 0px 0px;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5),
-    0px 1px 1px 0px rgba(255, 255, 255, 0.5) inset;
-}
-
 .mini-btn {
   position: relative;
   &::after {

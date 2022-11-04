@@ -26,7 +26,7 @@ onMounted(() => {
 <template>
   <router-view />
   <div class="loading-box" v-if="loading">
-    <van-loading color="#1164ff" type="circular" size="40px" />
+    <van-loading color="#663dad" type="circular" size="40px" />
   </div>
 </template>
 <style lang="scss">

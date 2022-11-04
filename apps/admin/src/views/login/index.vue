@@ -19,7 +19,7 @@ import { useDataThemeChange } from "/@/layout/hooks/useDataThemeChange";
 import dayIcon from "/@/assets/svg/day.svg?component";
 import darkIcon from "/@/assets/svg/dark.svg?component";
 import globalization from "/@/assets/svg/globalization.svg?component";
-import { loginRelApi } from "/@/api/login";
+import { useUserStore } from "/@/store/modules/user";
 
 defineOptions({
   name: "Login"
@@ -35,6 +35,7 @@ const { t } = useI18n();
 const { dataTheme, dataThemeChange } = useDataThemeChange();
 const { title, getDropdownItemStyle, getDropdownItemClass } = useNav();
 const { locale, translationCh, translationEn } = useTranslationLang();
+const { loginByUsername } = useUserStore();
 
 const ruleForm = reactive({
   account: "admin",
@@ -47,26 +48,26 @@ const onLogin = async (formEl: FormInstance | undefined) => {
   await formEl.validate(async (valid, fields) => {
     if (valid) {
       // 模拟请求，需根据实际开发进行修改
-      // setTimeout(() => {
-      //   loading.value = false;
-      //   storageSession.setItem("info", {
-      //     username: "admin",
-      //     accessToken: "eyJhbGciOiJIUzUxMiJ9.test"
-      //   });
-      //   initRouter("admin").then(() => {});
-      //   message.success("登录成功");
-      //   router.push("/");
-      // }, 2000);
-      const res: any = await loginRelApi(ruleForm);
-      const data = res.info || {};
-      loading.value = false;
-      storageSession.setItem("info", {
-        username: "admin",
-        accessToken: data.token || "eyJhbGciOiJIUzUxMiJ9.test"
-      });
-      initRouter("admin").then(() => {});
-      message.success("登录成功");
-      router.push("/");
+      setTimeout(() => {
+        loading.value = false;
+        storageSession.setItem("info", {
+          username: "admin",
+          accessToken: "eyJhbGciOiJIUzUxMiJ9.test"
+        });
+        initRouter("admin").then(() => {});
+        message.success("登录成功");
+        router.push("/");
+      }, 2000);
+      // const res: any = await loginByUsername(ruleForm);
+      // const data = res.info || {};
+      // loading.value = false;
+      // storageSession.setItem("info", {
+      //   username: "admin",
+      //   accessToken: data.token || "eyJhbGciOiJIUzUxMiJ9.test"
+      // });
+      // initRouter("admin").then(() => {});
+      // message.success("登录成功");
+      // router.push("/");
     } else {
       loading.value = false;
       return fields;

@@ -97,10 +97,10 @@ let pageInfo = reactive<
   } & GetApiFinanceMachinesResponse
 >({
   pageSize: 20,
-  pageNum: 1,
+  pageNum: 0,
   pageTurn: {
     pageSize: 20,
-    page: 1,
+    page: 0,
   },
   list: [],
 });
@@ -117,9 +117,6 @@ const doShowDialog = () => {
 };
 
 const onLoad = async () => {
-  if (loading.value) {
-    return;
-  }
   // 异步更新数据
   loading.value = true;
   finished.value = false;
@@ -132,11 +129,14 @@ const onLoad = async () => {
       pageInfo.list = res.list;
       pageInfo.pageTurn = res.pageTurn;
       loading.value = false;
-      finished.value = true;
+      if ((pageInfo.pageTurn?.pageCount || 0) <= pageInfo.pageNum) {
+        finished.value = true;
+      }
     })
     .catch(() => {
       loading.value = false;
       error.value = true;
+      pageInfo.pageNum--;
     });
 };
 </script>

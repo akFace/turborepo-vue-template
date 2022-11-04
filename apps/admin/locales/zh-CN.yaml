@@ -19,7 +19,7 @@ buttons:
   hscloseOtherTabs: 关闭其他标签页
   hscloseAllTabs: 关闭全部标签页
 menus:
-  hshome: 首页
+  hshome: 用户管理
   userManagement: 用户管理
   hslogin: 登录
   hserror: 错误页面

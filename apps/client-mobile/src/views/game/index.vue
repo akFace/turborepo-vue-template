@@ -97,21 +97,33 @@
                 @click="stopAutoPlay"
                 v-if="buttonStatus === MACHINE_PLAYER_STATUS.AUTO_PLAY"
               >
-                <p>(自动投币中)</p>
-                <p>停止</p>
+                <p class="btn-mini-text">(自動投幣中)</p>
+                <p class="btn-big-text">停止</p>
+              </van-button>
+              <van-button
+                class="action-btn repair"
+                round
+                type="success"
+                @click="stopAutoPlay"
+                v-if="buttonStatus === MACHINE_PLAYER_STATUS.BESPEAK"
+              >
+                <p class="btn-mini-text">(排隊中：3)</p>
+                <p class="btn-big-text">取消預約</p>
               </van-button>
               <van-button
                 class="action-btn used"
                 round
                 type="success"
                 v-if="buttonStatus === MACHINE_PLAYER_STATUS.USED"
-              ></van-button>
+                >佔用中</van-button
+              >
               <van-button
                 class="action-btn repair"
                 round
                 type="success"
                 v-if="buttonStatus === MACHINE_PLAYER_STATUS.REPAIRS"
-              ></van-button>
+                >維修中</van-button
+              >
             </div>
             <div class="my-sway" @click="playSwing">
               <img src="@/assets/image/game/icon-sway.svg" alt="" />
@@ -264,10 +276,15 @@ const playGame = async () => {
 };
 // 摇摆
 const playSwing = async () => {
-  const res = await postApiFinanceMachinesSwing({
-    machineId: 23211,
-    operateId: loginMachineInfo.value?.operateId,
-  });
+  const res = await postApiFinanceMachinesSwing(
+    {
+      machineId: 23211,
+      operateId: loginMachineInfo.value?.operateId,
+    },
+    {
+      showLoading: true,
+    }
+  );
 };
 
 // 设置倒计时
@@ -498,25 +515,35 @@ watch(isMuted, (val) => {
       width: 170px;
       height: 62px;
       margin: 0 auto;
-      font-size: 18px;
-      font-weight: normal;
+      font-size: 24px;
+      font-weight: 600;
       text-align: center;
       color: #ffffff;
       background-color: transparent;
       background-repeat: no-repeat;
       background-size: 100%;
       border: none;
+      .btn-big-text {
+        font-size: 20px;
+      }
+      .btn-mini-text {
+        font-size: 13px;
+        text-shadow: none;
+      }
       &.login {
         background-image: url('../../assets/image/game/btn-start@2x.png');
+        /* prettier-ignore */
+        // text-shadow: #d36833 -2PX -2PX 0PX, #d36833 2PX 2PX 0PX, #d36833 -2PX 2PX 0PX, #d36833 2PX -2PX 0PX;
       }
       &.playing {
         background-image: url('../../assets/image/game/btn-put-coin@2x.png');
       }
-      &.used {
-        background-image: url('../../assets/image/game/btn-used@2x.png');
+      &.auto-playing {
+        background-image: url('../../assets/image/game/btn_red@2x.png');
       }
+      &.used,
       &.repair {
-        background-image: url('../../assets/image/game/btn-repair@2x.png');
+        background-image: url('../../assets/image/game/btn_gray@2x.png');
       }
     }
   }
