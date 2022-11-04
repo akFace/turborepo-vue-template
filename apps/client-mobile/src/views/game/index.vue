@@ -209,7 +209,7 @@ const gameId = computed(() => {
 });
 
 const machineId = computed(() => {
-  return gameInfo.value?.machineId as number;
+  return gameInfo.value?.id as any;
 });
 
 const gameInfo = ref<GetMachinesIdResponse['info']>({});
