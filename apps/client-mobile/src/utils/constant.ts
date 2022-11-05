@@ -9,32 +9,32 @@ export enum STATUS_CODE {
   SING_USER_DELETED = 10213,
 }
 
-export enum LIVE_STATUS {
-  CREATING = 0, // 创建中
-  UNLIVING = 1, // 未开播
-  LIVING = 2, // 直播中
-  END = 3, // 直播结束
-  REC_END = 4, // 录制完成，可回放
-}
-export enum LANGUAGE_TYPE {
-  ZH_TW = '1',
-  EN = '2',
-}
-export enum LIVE_SCENE {
-  ACTIVE_MARKETING = 1, // 市场营销
+export enum MACHINE_STAUS {
+  /*状态 1-上架 2-占用 3-维修中 4-下架*/
+  ONLINE = 1,
+  USED = 2,
+  REPAIRS = 3,
+  OFFLINE = 4,
 }
 
-export enum LIVE_ROLE {
-  SPEAK = 1, // 主播，講師，主持人
-  MANAGE = 2, // 管理員，助教
-  VIEWER = 3, // 觀眾
-  GUEST = 4, // 嘉賓
+export enum MACHINE_OPERATE_TYPE {
+  /*操作类型 1-上机 2-投币 3-摇摆雨刮 4-下机*/
+  ONLINE = 1,
+  PUT_COIN = 2,
+  SWAY = 3,
+  OFFLINE = 4,
 }
-
-export enum LIVE_USER_TYPE {
-  SPEAKER = 1, // 主播
-  ADMIN = 2, // 管理员
-  VIEWER = 3, // 游客(观众)
-  WHITE = 4, // 白名单
-  GUEST = 5, // 嘉宾
+export enum MACHINE_PLAYER_STATUS {
+  /* 初始状态 */
+  INIT = 'init',
+  /* 游玩中 */
+  PLAYING = 'playing',
+  /* 占用中 */
+  USED = 'used',
+  /* 维修中 */
+  REPAIRS = 'repairs',
+  /* 预约中 */
+  BESPEAK = 'bespeak',
+  /* 自动投币中 */
+  AUTO_PLAY = 'auto-play',
 }

@@ -19,6 +19,7 @@ import { useDataThemeChange } from "/@/layout/hooks/useDataThemeChange";
 import dayIcon from "/@/assets/svg/day.svg?component";
 import darkIcon from "/@/assets/svg/dark.svg?component";
 import globalization from "/@/assets/svg/globalization.svg?component";
+import { useUserStore } from "/@/store/modules/user";
 
 defineOptions({
   name: "Login"
@@ -34,16 +35,17 @@ const { t } = useI18n();
 const { dataTheme, dataThemeChange } = useDataThemeChange();
 const { title, getDropdownItemStyle, getDropdownItemClass } = useNav();
 const { locale, translationCh, translationEn } = useTranslationLang();
+const { loginByUsername } = useUserStore();
 
 const ruleForm = reactive({
-  username: "admin",
+  account: "admin",
   password: "admin123"
 });
 
 const onLogin = async (formEl: FormInstance | undefined) => {
   loading.value = true;
   if (!formEl) return;
-  await formEl.validate((valid, fields) => {
+  await formEl.validate(async (valid, fields) => {
     if (valid) {
       // 模拟请求，需根据实际开发进行修改
       setTimeout(() => {
@@ -56,6 +58,16 @@ const onLogin = async (formEl: FormInstance | undefined) => {
         message.success("登录成功");
         router.push("/");
       }, 2000);
+      // const res: any = await loginByUsername(ruleForm);
+      // const data = res.info || {};
+      // loading.value = false;
+      // storageSession.setItem("info", {
+      //   username: "admin",
+      //   accessToken: data.token || "eyJhbGciOiJIUzUxMiJ9.test"
+      // });
+      // initRouter("admin").then(() => {});
+      // message.success("登录成功");
+      // router.push("/");
     } else {
       loading.value = false;
       return fields;
@@ -138,11 +150,11 @@ dataThemeChange();
                     trigger: 'blur'
                   }
                 ]"
-                prop="username"
+                prop="account"
               >
                 <el-input
                   clearable
-                  v-model="ruleForm.username"
+                  v-model="ruleForm.account"
                   :placeholder="t('login.username')"
                   :prefix-icon="useRenderIcon('user')"
                 />

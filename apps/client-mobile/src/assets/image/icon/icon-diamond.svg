@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="15px" height="14px" viewBox="0 0 15 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic_integral</title>
+    <defs>
+        <filter x="-75.0%" y="-75.0%" width="250.0%" height="250.0%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.662137951   0 0 0 0 0.0380929109   0 0 0 0 0.784977125  0 0 0 0.604350484 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="H5版本（繁体）" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="H5推币机-兌換" transform="translate(-68.000000, -734.000000)">
+            <g id="编组-4" transform="translate(0.000000, 214.000000)">
+                <g id="普通套餐" transform="translate(16.000000, 164.000000)">
+                    <g id="-mockplus-" transform="translate(10.000000, 282.000000)">
+                        <g id="编组" transform="translate(42.500000, 70.000000)">
+                            <g id="ic/coin" transform="translate(0.000000, 4.000000)" filter="url(#filter-1)">
+                                <g id="编组">
+                                    <path d="M7,0.5 C8.791075,0.5 10.4159098,1.22974157 11.5930841,2.40691589 C12.7702584,3.58409021 13.5,5.208925 13.5,7 C13.5,8.791075 12.7702584,10.4159098 11.5930841,11.5930841 C10.4159098,12.7702584 8.791075,13.5 7,13.5 C5.208925,13.5 3.58409021,12.7702584 2.40691589,11.5930841 C1.22974157,10.4159098 0.5,8.791075 0.5,7 C0.5,5.208925 1.22974157,3.58409021 2.40691589,2.40691589 C3.58409021,1.22974157 5.208925,0.5 7,0.5 Z" id="路径" stroke="#97DFF8" fill="#23BFF5" fill-rule="nonzero"></path>
+                                    <path d="M7.4139336,10.7462863 L10.8463248,6.89982466 C11.0262245,6.7163859 11.0510557,6.43124536 10.9055728,6.21947093 L9.72194372,4.26628325 C9.63340453,4.08920489 9.42570359,4 9.24862523,4 L4.75110103,4 C4.5447315,4 4.36632172,4.08920489 4.27844825,4.26628325 L3.09415347,6.21947093 C2.94884542,6.4313997 2.97395677,6.7165531 3.1540672,6.89982466 L6.58579266,10.7462863 C6.70428871,10.8641166 6.85207592,10.9233647 6.99986313,10.9233647 C7.15601394,10.9220896 7.30514595,10.8583129 7.4139336,10.7462863 Z" id="路径" fill="#FFFFFF" fill-rule="nonzero"></path>
+                                    <path d="M4.85355339,5.14644661 L4.5,5.5 C4.38561808,5.61438192 4.38561808,5.79983165 4.5,5.91421356 C4.55492813,5.9691417 4.62942667,6 4.70710678,6 L9.29289322,6 C9.45465368,6 9.58578644,5.86886724 9.58578644,5.70710678 C9.58578644,5.62942667 9.55492813,5.55492813 9.5,5.5 L9.14644661,5.14644661 C9.05267842,5.05267842 8.92550146,5 8.79289322,5 L5.20710678,5 C5.07449854,5 4.94732158,5.05267842 4.85355339,5.14644661 Z" id="路径-3" fill="#23BFF5"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

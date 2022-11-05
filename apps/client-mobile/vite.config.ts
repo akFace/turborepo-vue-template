@@ -9,15 +9,16 @@ import styleImport, { VantResolve } from 'vite-plugin-style-import';
 export default defineConfig({
   base: './',
   server: {
-    port: 9003,
+    port: 8846,
     open: false,
     host: '0.0.0.0',
     proxy: {
-      '/livefront/': {
+      '/api': {
         // target: 'http://43.129.181.111',
-        target: 'https://m.fruitmedia-hk.com',
+        target: 'http://1.12.239.170:10002',
         // target: 'http://livestream.inet',
         changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
   },
@@ -46,6 +47,14 @@ export default defineConfig({
         }),
         require('postcss-flexbugs-fixes'),
       ],
+    },
+    // css预处理器
+    preprocessorOptions: {
+      scss: {
+        charset: false,
+        // 全局样式变量
+        additionalData: '@import "./src/assets/css/variables.scss";',
+      },
     },
   },
   plugins: [

@@ -1,16 +1,24 @@
+import { getUsersInfo, GetUsersInfoResponse } from '@/services';
 import { defineStore, StateTree, _GettersTree } from 'pinia';
 
-export const useStudent = defineStore('student', {
+export const useUser = defineStore('userInfo', {
   state() {
     return {
-      info: null,
+      userInfo: {} as GetUsersInfoResponse['info'],
     };
   },
   actions: {
     updateUserInfo(info: any) {
       this.$patch((state) => {
-        state.info = info;
+        state.userInfo = info;
       });
+    },
+    async login() {},
+    async getUserInfoByApi() {
+      const { info }: any = await getUsersInfo();
+      if (info) {
+        this.updateUserInfo(info);
+      }
     },
   },
 });

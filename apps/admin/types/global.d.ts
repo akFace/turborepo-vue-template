@@ -6,7 +6,8 @@ import type {
   PropType as VuePropType
 } from "vue";
 import type { ECharts } from "echarts";
-import { type ResponsiveStorage } from "./index";
+import { AxiosRequestConfig } from "axios";
+import { type ResponsiveStorage, IAxiosConfig } from "./index";
 
 // GlobalComponents for Volar
 declare module "vue" {
@@ -134,5 +135,14 @@ declare global {
     interface IntrinsicAttributes {
       [elem: string]: any;
     }
+  }
+}
+
+declare module "axios" {
+  export interface AxiosRequestConfig {
+    /**
+     * @description 拓展axios配置
+     */
+    config?: IAxiosConfig;
   }
 }

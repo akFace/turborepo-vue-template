@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="14px" viewBox="0 0 34 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>tab_vip标</title>
+    <defs>
+        <linearGradient x1="0%" y1="50%" x2="100%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#56D3FA" offset="0%"></stop>
+            <stop stop-color="#7962FF" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0%" y1="50%" x2="100%" y2="50%" id="linearGradient-2">
+            <stop stop-color="#000000" stop-opacity="0.5" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="50.5060244%"></stop>
+            <stop stop-color="#000000" stop-opacity="0.5" offset="100%"></stop>
+        </linearGradient>
+        <path d="M8.67232856,3.50766528 L7.05417564,4.56804321 L6.02761938,3.30026908 C6.27126564,2.96831171 6.33842929,2.53866866 6.20771734,2.14819 C6.0483622,1.66628724 5.62103458,1.32956289 5.06545539,1.2482438 C5.02204366,1.24165752 4.97788677,1.24165752 4.93447505,1.2482438 C4.37780861,1.33010651 3.95212252,1.6662979 3.78839709,2.14819 C3.65806688,2.53834149 3.7252156,2.96747967 3.96849506,3.29917119 L2.94466755,4.56804321 L1.32542739,3.50766528 C1.17551343,3.41154207 0.982243731,3.41610273 0.837030621,3.51919016 C0.69181751,3.62227759 0.623768068,3.80322856 0.66506819,3.97645721 L1.67033802,8.01120162 C1.77915885,8.44921269 2.17243489,8.75669591 2.62376146,8.75669591 L7.37944135,8.75669591 C7.82914432,8.75472224 8.22008399,8.44763283 8.32850518,8.01119096 L9.33377501,3.97645721 C9.37739585,3.80281753 9.30973952,3.62022931 9.16350483,3.51693879 C9.01756772,3.41221927 8.82211451,3.40852907 8.67232856,3.50766528 Z" id="path-3"></path>
+        <filter x="-2.0%" y="-2.3%" width="104.0%" height="109.3%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="0.35" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowOffsetOuter1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="44.3394053%" y1="40.8859327%" x2="75.9841826%" y2="65.1985372%" id="linearGradient-5">
+            <stop stop-color="#9AD8FE" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0%" y1="50%" x2="100%" y2="50%" id="linearGradient-6">
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#FFF3F3" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="H5版本（繁体）" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="H5游戏界面-开始游戏" transform="translate(-94.000000, -70.000000)">
+            <g id="用户名" transform="translate(60.000000, 54.000000)">
+                <g id="vip标" transform="translate(34.000000, 16.000000)">
+                    <path d="M27,0.25 C28.863961,0.25 30.551461,1.00551948 31.7729708,2.22702923 C32.9944805,3.44853897 33.75,5.13603897 33.75,7 C33.75,8.86396103 32.9944805,10.551461 31.7729708,11.7729708 C30.551461,12.9944805 28.863961,13.75 27,13.75 L27,13.75 L7,13.75 C5.13603897,13.75 3.44853897,12.9944805 2.22702923,11.7729708 C1.00551948,10.551461 0.25,8.86396103 0.25,7 C0.25,5.13603897 1.00551948,3.44853897 2.22702923,2.22702923 C3.44853897,1.00551948 5.13603897,0.25 7,0.25 L7,0.25 Z" id="矩形" stroke="url(#linearGradient-2)" stroke-width="0.5" fill="url(#linearGradient-1)"></path>
+                    <g id="编组" transform="translate(2.000000, 2.000000)">
+                        <rect id="矩形" x="0" y="0" width="10" height="10"></rect>
+                        <g id="路径" fill-rule="nonzero">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                            <use fill="#FFFFFF" xlink:href="#path-3"></use>
+                        </g>
+                        <path d="M8.73411046,6.38416864 L8.32850518,8.01119096 C8.22008399,8.44763283 7.82914432,8.75472224 7.37944135,8.75669591 L7.37944135,8.75669591 L2.62376146,8.75669591 C2.39286126,8.75669591 2.1771551,8.67621586 2.00695992,8.53895117 C2.90260068,7.96158909 3.90053483,7.51728424 5,7.20573893 C6.4345007,6.79925768 7.70148584,6.619444 8.73411046,6.38416864 Z" id="形状结合" fill="url(#linearGradient-5)"></path>
+                    </g>
+                    <text id="6" font-family="Helvetica-Bold, Helvetica" font-size="10" font-weight="bold" letter-spacing="-0.357142857" fill="#FFFFFF">
+                        <tspan x="23.9608375" y="11">6</tspan>
+                    </text>
+                    <polygon id="路径-2" fill="#FFFFFF" points="16 3.00781631 18.2952601 3.00781631 18.6095934 7.16261491 21.1790521 3.00781631 23.4522266 3.00781631 18.8432288 11.0078163 16.7835235 11.0078163"></polygon>
+                    <circle id="椭圆形" stroke="url(#linearGradient-6)" stroke-width="0.5" cx="7" cy="7" r="6.75"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

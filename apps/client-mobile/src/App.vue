@@ -1,15 +1,35 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
+import { computed, onMounted } from 'vue';
 import { useGlobalStore } from '@/stores/global';
-import { computed } from 'vue';
+import { useMessage } from '@/stores/modules/message';
+import { useUser } from '@/stores/modules/user';
 const loading = computed(() => {
   return useGlobalStore().loading;
+});
+
+const useTim = useMessage();
+const { getUserInfoByApi } = useUser();
+
+const initTim = async () => {
+  const options = {
+    sdkAppId: '',
+    userId: '',
+    userSig: '',
+    channel: '',
+  };
+  await useTim.initTimClient(options);
+};
+
+onMounted(() => {
+  // initTim();
+  getUserInfoByApi();
 });
 </script>
 <template>
   <router-view />
   <div class="loading-box" v-if="loading">
-    <van-loading color="#1164ff" type="circular" size="40px" />
+    <van-loading color="#663dad" type="circular" size="40px" />
   </div>
 </template>
 <style lang="scss">

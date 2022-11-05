@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { RequestFunctionParams } from 'yapi-to-typescript';
 import { showMessage } from '@/components/basics/message';
 import { useUrlSearchParams } from '@vueuse/core';
-import { hideLoading, showLoading } from '@/plugins/loading';
+import { closeLoading, showLoading } from '@/plugins/loading';
 
 export interface RequestOptions extends AxiosRequestConfig {
   /**
@@ -89,7 +89,7 @@ axiosRequest.interceptors.request.use(
 axiosRequest.interceptors.response.use(
   (response) => {
     // 对响应数据做点什么
-    hideLoading();
+    closeLoading();
     const data = response.data || {};
     const { tip, code } = data || {};
     if (code === 601 || code === 602 || code === 603) {
@@ -119,7 +119,7 @@ axiosRequest.interceptors.response.use(
     }
   },
   (error) => {
-    hideLoading();
+    closeLoading();
     if (showErrorMsg) {
       showMessage({
         message: error,
