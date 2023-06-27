@@ -1,4 +1,4 @@
-# 推币项目
+# turborepo，使用Turborepo进行复杂拓扑关系的monorepo最优构建。多个项目集合包管理
 
 ## 快速开始
 
