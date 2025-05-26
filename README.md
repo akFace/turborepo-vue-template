@@ -1,7 +1,11 @@
-# 多个项项目集合成一个大型项目模板，共享公共包资源，使用Turborepo进行复杂拓扑关系的monorepo最优构建。多个项目集合包管理
+## 基于vue3+TypeScript+vite 多个项项目集合成一个大型项目模板，共享公共包资源，使用Turborepo进行复杂拓扑关系的monorepo最优构建。
+## 多个项目集合包管理
 
 ## 快速开始
 
+```js
+git clone https://github.com/akFace/turborepo-vue-template.git
+```
 1. 安装 nodejs: https://nodejs.org/en/
 2. 安装 pnpm: `npm i pnpm -g`
 3. 安装依赖: `pnpm install`
