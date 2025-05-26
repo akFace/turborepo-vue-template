@@ -15,15 +15,10 @@ import './assets/css/mobile/common.scss';
 import './assets/css/team.scss';
 import './assets/css/vant-theme.scss';
 
-import { initSentry } from './plugins/sentry';
-import LoadImg from '@/components/common/loadImg.vue';
-
 const app = createApp(App);
-initSentry(app, router);
 app.use(router);
 app.use(i18n);
 app.use(store);
 app.use(directives);
-app.component('load-img', LoadImg);
 app.use(Vant);
 app.mount('#app');

@@ -51,9 +51,10 @@ export default defineConfig({
     // css预处理器
     preprocessorOptions: {
       scss: {
+        api: 'modern-compiler',
         charset: false,
         // 全局样式变量
-        additionalData: '@import "./src/assets/css/variables.scss";',
+        additionalData: '@use "./src/assets/css/variables.scss";',
       },
     },
   },
