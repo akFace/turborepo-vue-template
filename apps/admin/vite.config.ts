@@ -1,38 +1,17 @@
-import dayjs from "dayjs";
-import { resolve } from "path";
-import pkg from "./package.json";
-import { warpperEnv, regExps } from "./build";
 import { getPluginsList } from "./build/plugins";
-import { UserConfigExport, ConfigEnv, loadEnv } from "vite";
+import { include, exclude } from "./build/optimize";
+import { type UserConfigExport, type ConfigEnv, loadEnv } from "vite";
+import {
+  root,
+  alias,
+  wrapperEnv,
+  pathResolve,
+  __APP_INFO__
+} from "./build/utils";
 
-/** 当前执行node命令时文件夹的地址（工作目录） */
-const root: string = process.cwd();
-
-/** 路径查找 */
-const pathResolve = (dir: string): string => {
-  return resolve(__dirname, ".", dir);
-};
-
-/** 设置别名 */
-const alias: Record<string, string> = {
-  "/@": pathResolve("src"),
-  "@build": pathResolve("build")
-};
-
-const { dependencies, devDependencies, name, version } = pkg;
-const __APP_INFO__ = {
-  pkg: { dependencies, devDependencies, name, version },
-  lastBuildTime: dayjs(new Date()).format("YYYY-MM-DD HH:mm:ss")
-};
-
-export default ({ command, mode }: ConfigEnv): UserConfigExport => {
-  const {
-    VITE_PORT,
-    VITE_LEGACY,
-    VITE_PUBLIC_PATH,
-    VITE_PROXY_DOMAIN,
-    VITE_PROXY_DOMAIN_REAL
-  } = warpperEnv(loadEnv(mode, root));
+export default ({ mode }: ConfigEnv): UserConfigExport => {
+  const { VITE_CDN, VITE_PORT, VITE_COMPRESSION, VITE_PUBLIC_PATH } =
+    wrapperEnv(loadEnv(mode, root));
   return {
     base: VITE_PUBLIC_PATH,
     root,
@@ -41,33 +20,39 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     },
     // 服务端渲染
     server: {
-      // 是否开启 https
-      https: false,
       // 端口号
       port: VITE_PORT,
       host: "0.0.0.0",
-      // 本地跨域代理
-      proxy:
-        VITE_PROXY_DOMAIN_REAL.length > 0
-          ? {
-              [VITE_PROXY_DOMAIN]: {
-                target: VITE_PROXY_DOMAIN_REAL,
-                // ws: true,
-                changeOrigin: true,
-                rewrite: (path: string) => regExps(path, VITE_PROXY_DOMAIN)
-              }
-            }
-          : null
+      // 本地跨域代理 https://cn.vitejs.dev/config/server-options.html#server-proxy
+      proxy: {},
+      // 预热文件以提前转换和缓存结果，降低启动期间的初始页面加载时长并防止转换瀑布
+      warmup: {
+        clientFiles: ["./index.html", "./src/{views,components}/*"]
+      }
     },
-    plugins: getPluginsList(command, VITE_LEGACY),
+    plugins: getPluginsList(VITE_CDN, VITE_COMPRESSION),
+    // https://cn.vitejs.dev/config/dep-optimization-options.html#dep-optimization-options
     optimizeDeps: {
-      include: ["pinia", "vue-i18n", "lodash-es", "@vueuse/core", "dayjs"],
-      exclude: ["@pureadmin/theme/dist/browser-utils"]
+      include,
+      exclude
     },
     build: {
+      // https://cn.vitejs.dev/guide/build.html#browser-compatibility
+      target: "es2015",
       sourcemap: false,
       // 消除打包大小超过500kb警告
-      chunkSizeWarningLimit: 4000
+      chunkSizeWarningLimit: 4000,
+      rollupOptions: {
+        input: {
+          index: pathResolve("./index.html", import.meta.url)
+        },
+        // 静态资源分类打包
+        output: {
+          chunkFileNames: "static/js/[name]-[hash].js",
+          entryFileNames: "static/js/[name]-[hash].js",
+          assetFileNames: "static/[ext]/[name]-[hash].[ext]"
+        }
+      }
     },
     define: {
       __INTLIFY_PROD_DEVTOOLS__: false,

@@ -1,37 +1,54 @@
-import { store } from "/@/store";
-import { appType } from "./types";
 import { defineStore } from "pinia";
-import { getConfig } from "/@/config";
-import type { StorageConfigs } from "/#/index";
-import { deviceDetection, storageLocal } from "@pureadmin/utils";
+import {
+  type appType,
+  store,
+  getConfig,
+  storageLocal,
+  deviceDetection,
+  responsiveStorageNameSpace
+} from "../utils";
 
-export const useAppStore = defineStore({
-  id: "pure-app",
+export const useAppStore = defineStore("pure-app", {
   state: (): appType => ({
     sidebar: {
       opened:
-        storageLocal.getItem<StorageConfigs>("responsive-layout")
-          ?.sidebarStatus ?? getConfig().SidebarStatus,
+        storageLocal().getItem<StorageConfigs>(
+          `${responsiveStorageNameSpace()}layout`
+        )?.sidebarStatus ?? getConfig().SidebarStatus,
       withoutAnimation: false,
       isClickCollapse: false
     },
     // 这里的layout用于监听容器拖拉后恢复对应的导航模式
     layout:
-      storageLocal.getItem<StorageConfigs>("responsive-layout")?.layout ??
-      getConfig().Layout,
-    device: deviceDetection() ? "mobile" : "desktop"
+      storageLocal().getItem<StorageConfigs>(
+        `${responsiveStorageNameSpace()}layout`
+      )?.layout ?? getConfig().Layout,
+    device: deviceDetection() ? "mobile" : "desktop",
+    // 浏览器窗口的可视区域大小
+    viewportSize: {
+      width: document.documentElement.clientWidth,
+      height: document.documentElement.clientHeight
+    }
   }),
   getters: {
-    getSidebarStatus() {
-      return this.sidebar.opened;
+    getSidebarStatus(state) {
+      return state.sidebar.opened;
     },
-    getDevice() {
-      return this.device;
+    getDevice(state) {
+      return state.device;
+    },
+    getViewportWidth(state) {
+      return state.viewportSize.width;
+    },
+    getViewportHeight(state) {
+      return state.viewportSize.height;
     }
   },
   actions: {
     TOGGLE_SIDEBAR(opened?: boolean, resize?: string) {
-      const layout = storageLocal.getItem<StorageConfigs>("responsive-layout");
+      const layout = storageLocal().getItem<StorageConfigs>(
+        `${responsiveStorageNameSpace()}layout`
+      );
       if (opened && resize) {
         this.sidebar.withoutAnimation = true;
         this.sidebar.opened = true;
@@ -46,7 +63,7 @@ export const useAppStore = defineStore({
         this.sidebar.isClickCollapse = !this.sidebar.opened;
         layout.sidebarStatus = this.sidebar.opened;
       }
-      storageLocal.setItem("responsive-layout", layout);
+      storageLocal().setItem(`${responsiveStorageNameSpace()}layout`, layout);
     },
     async toggleSideBar(opened?: boolean, resize?: string) {
       await this.TOGGLE_SIDEBAR(opened, resize);
@@ -56,6 +73,9 @@ export const useAppStore = defineStore({
     },
     setLayout(layout) {
       this.layout = layout;
+    },
+    setViewportSize(size) {
+      this.viewportSize = size;
     }
   }
 });

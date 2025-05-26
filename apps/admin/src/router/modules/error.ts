@@ -1,44 +1,38 @@
-import { $t } from "/@/plugins/i18n";
-import type { RouteConfigsTable } from "/#/index";
+import { $t } from "@/plugins/i18n";
 
-const errorRouter: RouteConfigsTable = {
+export default {
   path: "/error",
   redirect: "/error/403",
   meta: {
-    icon: "information-line",
-    title: $t("menus.hserror"),
-    rank: 9,
-    showLink: false
+    icon: "ri/information-line",
+    // showLink: false,
+    title: $t("menus.pureAbnormal"),
+    rank: 9
   },
   children: [
     {
       path: "/error/403",
       name: "403",
-      component: () => import("/@/views/error/403.vue"),
+      component: () => import("@/views/error/403.vue"),
       meta: {
-        title: $t("menus.hsfourZeroOne"),
-        showLink: false
+        title: $t("menus.pureFourZeroOne")
       }
     },
     {
       path: "/error/404",
       name: "404",
-      component: () => import("/@/views/error/404.vue"),
+      component: () => import("@/views/error/404.vue"),
       meta: {
-        title: $t("menus.hsfourZeroFour"),
-        showLink: false
+        title: $t("menus.pureFourZeroFour")
       }
     },
     {
       path: "/error/500",
       name: "500",
-      component: () => import("/@/views/error/500.vue"),
+      component: () => import("@/views/error/500.vue"),
       meta: {
-        title: $t("menus.hsFive"),
-        showLink: false
+        title: $t("menus.pureFive")
       }
     }
   ]
-};
-
-export default errorRouter;
+} satisfies RouteConfigsTable;

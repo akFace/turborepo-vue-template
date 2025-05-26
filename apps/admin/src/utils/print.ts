@@ -9,31 +9,36 @@ const Print = function (dom, options?: object): PrintFunction {
   options = options || {};
   // @ts-expect-error
   if (!(this instanceof Print)) return new Print(dom, options);
+  // @ts-expect-error
   this.conf = {
     styleStr: "",
     // Elements that need to dynamically get and set the height
     setDomHeightArr: [],
-    // Echart dom List
-    echartDomArr: [],
     // Callback before printing
     printBeforeFn: null,
     // Callback after printing
     printDoneCallBack: null
   };
+  // @ts-expect-error
   for (const key in this.conf) {
-    // eslint-disable-next-line no-prototype-builtins
     if (key && options.hasOwnProperty(key)) {
+      // @ts-expect-error
       this.conf[key] = options[key];
     }
   }
   if (typeof dom === "string") {
+    // @ts-expect-error
     this.dom = document.querySelector(dom);
   } else {
+    // @ts-expect-error
     this.dom = this.isDOM(dom) ? dom : dom.$el;
   }
+  // @ts-expect-error
   if (this.conf.setDomHeightArr && this.conf.setDomHeightArr.length) {
+    // @ts-expect-error
     this.setDomHeight(this.conf.setDomHeightArr);
   }
+  // @ts-expect-error
   this.init();
 };
 
@@ -73,6 +78,8 @@ Print.prototype = {
     const inputs = document.querySelectorAll("input");
     const selects = document.querySelectorAll("select");
     const textareas = document.querySelectorAll("textarea");
+    const canvass = document.querySelectorAll("canvas");
+
     for (let k = 0; k < inputs.length; k++) {
       if (inputs[k].type == "checkbox" || inputs[k].type == "radio") {
         if (inputs[k].checked == true) {
@@ -108,6 +115,15 @@ Print.prototype = {
       }
     }
 
+    for (let k4 = 0; k4 < canvass.length; k4++) {
+      const imageURL = canvass[k4].toDataURL("image/png");
+      const img = document.createElement("img");
+      img.src = imageURL;
+      img.setAttribute("style", "max-width: 100%;");
+      img.className = "isNeedRemove";
+      canvass[k4].parentNode.insertBefore(img, canvass[k4].nextElementSibling);
+    }
+
     return this.dom.outerHTML;
   },
   /**
@@ -123,13 +139,21 @@ Print.prototype = {
       "style",
       "position:absolute;width:0;height:0;top:-10px;left:-10px;"
     );
+
     // eslint-disable-next-line prefer-const
     w = f.contentWindow || f.contentDocument;
+
     // eslint-disable-next-line prefer-const
     doc = f.contentDocument || f.contentWindow.document;
     doc.open();
     doc.write(content);
     doc.close();
+
+    const removes = document.querySelectorAll(".isNeedRemove");
+    for (let k = 0; k < removes.length; k++) {
+      removes[k].parentNode.removeChild(removes[k]);
+    }
+
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const _this = this;
     iframe.onload = function (): void {
@@ -137,41 +161,15 @@ Print.prototype = {
       if (_this.conf.printBeforeFn) {
         _this.conf.printBeforeFn({ doc });
       }
-
-      _this.drawEchartImg(doc).then(() => {
-        _this.toPrint(w);
-        setTimeout(function () {
-          document.body.removeChild(iframe);
-          // After popup, callback
-          if (_this.conf.printDoneCallBack) {
-            _this.conf.printDoneCallBack();
-          }
-        }, 100);
-      });
+      _this.toPrint(w);
+      setTimeout(function () {
+        document.body.removeChild(iframe);
+        // After popup, callback
+        if (_this.conf.printDoneCallBack) {
+          _this.conf.printDoneCallBack();
+        }
+      }, 100);
     };
-  },
-  /**
-   * echarts printing
-   * @param {Object} doc iframe window
-   */
-  drawEchartImg(doc): Promise<void> {
-    return new Promise<void>(resolve => {
-      if (this.conf.echartDomArr && this.conf.echartDomArr.length > 0) {
-        this.conf.echartDomArr.forEach(e => {
-          const dom = doc.querySelector("#" + e.$el.id);
-          const img = new Image();
-          const w = dom.offsetWidth + "px";
-          const H = dom.offsetHeight + "px";
-
-          img.style.width = w;
-          img.style.height = H;
-          img.src = e.imgSrc;
-          dom.innerHTML = "";
-          dom.appendChild(img);
-        });
-      }
-      resolve();
-    });
   },
   /**
     Print
@@ -184,7 +182,7 @@ Print.prototype = {
           if (!frameWindow.document.execCommand("print", false, null)) {
             frameWindow.print();
           }
-        } catch (e) {
+        } catch {
           frameWindow.print();
         }
         frameWindow.close();

@@ -1,40 +1,61 @@
 import { defineStore } from "pinia";
-import { store } from "/@/store";
-import { isEqual } from "lodash-unified";
-import type { StorageConfigs } from "/#/index";
-import { routerArrays } from "/@/layout/types";
-import { multiType, positionType } from "./types";
-import { storageLocal } from "@pureadmin/utils";
-import { isUrl } from "/@/utils/tool";
+import {
+  type multiType,
+  type positionType,
+  store,
+  isUrl,
+  isEqual,
+  isNumber,
+  isBoolean,
+  getConfig,
+  routerArrays,
+  storageLocal,
+  responsiveStorageNameSpace
+} from "../utils";
+import { usePermissionStoreHook } from "./permission";
 
-export const useMultiTagsStore = defineStore({
-  id: "pure-multiTags",
+export const useMultiTagsStore = defineStore("pure-multiTags", {
   state: () => ({
     // 存储标签页信息（路由信息）
-    multiTags: storageLocal.getItem<StorageConfigs>("responsive-configure")
-      .multiTagsCache
-      ? storageLocal.getItem<StorageConfigs>("responsive-tags")
-      : [...routerArrays],
-    multiTagsCache: storageLocal.getItem<StorageConfigs>("responsive-configure")
-      .multiTagsCache
+    multiTags: storageLocal().getItem<StorageConfigs>(
+      `${responsiveStorageNameSpace()}configure`
+    )?.multiTagsCache
+      ? storageLocal().getItem<StorageConfigs>(
+          `${responsiveStorageNameSpace()}tags`
+        )
+      : ([
+          ...routerArrays,
+          ...usePermissionStoreHook().flatteningRoutes.filter(
+            v => v?.meta?.fixedTag
+          )
+        ] as any),
+    multiTagsCache: storageLocal().getItem<StorageConfigs>(
+      `${responsiveStorageNameSpace()}configure`
+    )?.multiTagsCache
   }),
   getters: {
-    getMultiTagsCache() {
-      return this.multiTagsCache;
+    getMultiTagsCache(state) {
+      return state.multiTagsCache;
     }
   },
   actions: {
     multiTagsCacheChange(multiTagsCache: boolean) {
       this.multiTagsCache = multiTagsCache;
       if (multiTagsCache) {
-        storageLocal.setItem("responsive-tags", this.multiTags);
+        storageLocal().setItem(
+          `${responsiveStorageNameSpace()}tags`,
+          this.multiTags
+        );
       } else {
-        storageLocal.removeItem("responsive-tags");
+        storageLocal().removeItem(`${responsiveStorageNameSpace()}tags`);
       }
     },
     tagsCache(multiTags) {
       this.getMultiTagsCache &&
-        storageLocal.setItem("responsive-tags", multiTags);
+        storageLocal().setItem(
+          `${responsiveStorageNameSpace()}tags`,
+          multiTags
+        );
     },
     handleTags<T>(
       mode: string,
@@ -55,6 +76,9 @@ export const useMultiTagsStore = defineStore({
             if (isUrl(tagVal?.name)) return;
             // 如果title为空拒绝添加空信息到标签页
             if (tagVal?.meta?.title.length === 0) return;
+            // showLink:false 不添加到标签页
+            if (isBoolean(tagVal?.meta?.showLink) && !tagVal?.meta?.showLink)
+              return;
             const tagPath = tagVal.path;
             // 判断tag是否已存在
             const tagHasExits = this.multiTags.some(tag => {
@@ -89,6 +113,14 @@ export const useMultiTagsStore = defineStore({
             }
             this.multiTags.push(value);
             this.tagsCache(this.multiTags);
+            if (
+              getConfig()?.MaxTagsLevel &&
+              isNumber(getConfig().MaxTagsLevel)
+            ) {
+              if (this.multiTags.length > getConfig().MaxTagsLevel) {
+                this.multiTags.splice(1, 1);
+              }
+            }
           }
           break;
         case "splice":

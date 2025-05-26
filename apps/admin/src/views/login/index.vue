@@ -2,80 +2,97 @@
 import { useI18n } from "vue-i18n";
 import Motion from "./utils/motion";
 import { useRouter } from "vue-router";
+import { message } from "@/utils/message";
 import { loginRules } from "./utils/rule";
 import { ref, reactive, toRaw } from "vue";
-import { initRouter } from "/@/router/utils";
-import { useNav } from "/@/layout/hooks/useNav";
-import { message } from "@pureadmin/components";
+import { debounce } from "@pureadmin/utils";
+import { useNav } from "@/layout/hooks/useNav";
+import { useEventListener } from "@vueuse/core";
 import type { FormInstance } from "element-plus";
-import { storageSession } from "@pureadmin/utils";
-import { $t, transformI18n } from "/@/plugins/i18n";
-import { useLayout } from "/@/layout/hooks/useLayout";
+import { $t, transformI18n } from "@/plugins/i18n";
+import { useLayout } from "@/layout/hooks/useLayout";
+import { useUserStoreHook } from "@/store/modules/user";
+import { initRouter, getTopMenu } from "@/router/utils";
 import { bg, avatar, illustration } from "./utils/static";
-import { useRenderIcon } from "/@/components/ReIcon/src/hooks";
-import { useTranslationLang } from "/@/layout/hooks/useTranslationLang";
-import { useDataThemeChange } from "/@/layout/hooks/useDataThemeChange";
+import { useRenderIcon } from "@/components/ReIcon/src/hooks";
+import { useTranslationLang } from "@/layout/hooks/useTranslationLang";
+import { useDataThemeChange } from "@/layout/hooks/useDataThemeChange";
 
-import dayIcon from "/@/assets/svg/day.svg?component";
-import darkIcon from "/@/assets/svg/dark.svg?component";
-import globalization from "/@/assets/svg/globalization.svg?component";
-import { useUserStore } from "/@/store/modules/user";
+import dayIcon from "@/assets/svg/day.svg?component";
+import darkIcon from "@/assets/svg/dark.svg?component";
+import globalization from "@/assets/svg/globalization.svg?component";
+import Lock from "~icons/ri/lock-fill";
+import Check from "~icons/ep/check";
+import User from "~icons/ri/user-3-fill";
 
 defineOptions({
   name: "Login"
 });
+
 const router = useRouter();
 const loading = ref(false);
+const disabled = ref(false);
 const ruleFormRef = ref<FormInstance>();
 
 const { initStorage } = useLayout();
 initStorage();
 
 const { t } = useI18n();
-const { dataTheme, dataThemeChange } = useDataThemeChange();
+const { dataTheme, overallStyle, dataThemeChange } = useDataThemeChange();
+dataThemeChange(overallStyle.value);
 const { title, getDropdownItemStyle, getDropdownItemClass } = useNav();
 const { locale, translationCh, translationEn } = useTranslationLang();
-const { loginByUsername } = useUserStore();
 
 const ruleForm = reactive({
-  account: "admin",
+  username: "admin",
   password: "admin123"
 });
 
 const onLogin = async (formEl: FormInstance | undefined) => {
-  loading.value = true;
   if (!formEl) return;
-  await formEl.validate(async (valid, fields) => {
+  await formEl.validate(valid => {
     if (valid) {
-      // 模拟请求，需根据实际开发进行修改
-      setTimeout(() => {
-        loading.value = false;
-        storageSession.setItem("info", {
-          username: "admin",
-          accessToken: "eyJhbGciOiJIUzUxMiJ9.test"
-        });
-        initRouter("admin").then(() => {});
-        message.success("登录成功");
-        router.push("/");
-      }, 2000);
-      // const res: any = await loginByUsername(ruleForm);
-      // const data = res.info || {};
-      // loading.value = false;
-      // storageSession.setItem("info", {
-      //   username: "admin",
-      //   accessToken: data.token || "eyJhbGciOiJIUzUxMiJ9.test"
-      // });
-      // initRouter("admin").then(() => {});
-      // message.success("登录成功");
-      // router.push("/");
-    } else {
-      loading.value = false;
-      return fields;
+      loading.value = true;
+      useUserStoreHook()
+        .loginByUsername({
+          username: ruleForm.username,
+          password: ruleForm.password
+        })
+        .then(res => {
+          if (res.success) {
+            // 获取后端路由
+            return initRouter().then(() => {
+              disabled.value = true;
+              router
+                .push(getTopMenu(true).path)
+                .then(() => {
+                  message(t("login.pureLoginSuccess"), { type: "success" });
+                })
+                .finally(() => (disabled.value = false));
+            });
+          } else {
+            message(t("login.pureLoginFail"), { type: "error" });
+          }
+        })
+        .finally(() => (loading.value = false));
     }
   });
 };
 
-dataThemeChange();
+const immediateDebounce: any = debounce(
+  formRef => onLogin(formRef),
+  1000,
+  true
+);
+
+useEventListener(document, "keydown", ({ code }) => {
+  if (
+    ["Enter", "NumpadEnter"].includes(code) &&
+    !disabled.value &&
+    !loading.value
+  )
+    immediateDebounce(ruleFormRef.value);
+});
 </script>
 
 <template>
@@ -93,29 +110,29 @@ dataThemeChange();
       <!-- 国际化 -->
       <el-dropdown trigger="click">
         <globalization
-          class="hover:text-primary hover:!bg-[transparent] w-[20px] h-[20px] ml-1.5 cursor-pointer outline-none duration-300"
+          class="hover:text-primary hover:bg-[transparent]! w-[20px] h-[20px] ml-1.5 cursor-pointer outline-hidden duration-300"
         />
         <template #dropdown>
           <el-dropdown-menu class="translation">
             <el-dropdown-item
               :style="getDropdownItemStyle(locale, 'zh')"
-              :class="['dark:!text-white', getDropdownItemClass(locale, 'zh')]"
+              :class="['dark:text-white!', getDropdownItemClass(locale, 'zh')]"
               @click="translationCh"
             >
               <IconifyIconOffline
-                class="check-zh"
                 v-show="locale === 'zh'"
-                icon="check"
+                class="check-zh"
+                :icon="Check"
               />
               简体中文
             </el-dropdown-item>
             <el-dropdown-item
               :style="getDropdownItemStyle(locale, 'en')"
-              :class="['dark:!text-white', getDropdownItemClass(locale, 'en')]"
+              :class="['dark:text-white!', getDropdownItemClass(locale, 'en')]"
               @click="translationEn"
             >
-              <span class="check-en" v-show="locale === 'en'">
-                <IconifyIconOffline icon="check" />
+              <span v-show="locale === 'en'" class="check-en">
+                <IconifyIconOffline :icon="Check" />
               </span>
               English
             </el-dropdown-item>
@@ -131,7 +148,7 @@ dataThemeChange();
         <div class="login-form">
           <avatar class="avatar" />
           <Motion>
-            <h2 class="outline-none">{{ title }}</h2>
+            <h2 class="outline-hidden">{{ title }}</h2>
           </Motion>
 
           <el-form
@@ -139,24 +156,23 @@ dataThemeChange();
             :model="ruleForm"
             :rules="loginRules"
             size="large"
-            @keyup.enter="onLogin(ruleFormRef)"
           >
             <Motion :delay="100">
               <el-form-item
                 :rules="[
                   {
                     required: true,
-                    message: transformI18n($t('login.usernameReg')),
+                    message: transformI18n($t('login.pureUsernameReg')),
                     trigger: 'blur'
                   }
                 ]"
-                prop="account"
+                prop="username"
               >
                 <el-input
+                  v-model="ruleForm.username"
                   clearable
-                  v-model="ruleForm.account"
-                  :placeholder="t('login.username')"
-                  :prefix-icon="useRenderIcon('user')"
+                  :placeholder="t('login.pureUsername')"
+                  :prefix-icon="useRenderIcon(User)"
                 />
               </el-form-item>
             </Motion>
@@ -164,24 +180,25 @@ dataThemeChange();
             <Motion :delay="150">
               <el-form-item prop="password">
                 <el-input
+                  v-model="ruleForm.password"
                   clearable
                   show-password
-                  v-model="ruleForm.password"
-                  :placeholder="t('login.password')"
-                  :prefix-icon="useRenderIcon('lock')"
+                  :placeholder="t('login.purePassword')"
+                  :prefix-icon="useRenderIcon(Lock)"
                 />
               </el-form-item>
             </Motion>
 
             <Motion :delay="250">
               <el-button
-                class="w-full mt-4"
+                class="w-full mt-4!"
                 size="default"
                 type="primary"
                 :loading="loading"
+                :disabled="disabled"
                 @click="onLogin(ruleFormRef)"
               >
-                {{ t("login.login") }}
+                {{ t("login.pureLogin") }}
               </el-button>
             </Motion>
           </el-form>
@@ -192,7 +209,7 @@ dataThemeChange();
 </template>
 
 <style scoped>
-@import url("/@/style/login.css");
+@import url("@/style/login.css");
 </style>
 
 <style lang="scss" scoped>

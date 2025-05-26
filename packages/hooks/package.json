@@ -13,6 +13,5 @@
     "@vueuse/core": "^8.2.4"
   },
   "peerDependencies": {
-    "tim-js-sdk": "2.17.1"
   }
 }

@@ -1,73 +1,71 @@
-import { resolve } from "path";
+import { cdn } from "./cdn";
 import vue from "@vitejs/plugin-vue";
+import { pathResolve } from "./utils";
 import { viteBuildInfo } from "./info";
 import svgLoader from "vite-svg-loader";
-import legacy from "@vitejs/plugin-legacy";
+import Icons from "unplugin-icons/vite";
+import type { PluginOption } from "vite";
 import vueJsx from "@vitejs/plugin-vue-jsx";
-import { viteMockServe } from "vite-plugin-mock";
-import VueI18n from "@intlify/vite-plugin-vue-i18n";
-// import ElementPlus from "unplugin-element-plus/vite";
+import tailwindcss from "@tailwindcss/vite";
+import { configCompressPlugin } from "./compress";
+import removeNoMatch from "vite-plugin-router-warn";
 import { visualizer } from "rollup-plugin-visualizer";
 import removeConsole from "vite-plugin-remove-console";
-import themePreprocessorPlugin from "@pureadmin/theme";
-import { genScssMultipleScopeVars } from "/@/layout/theme";
-import DefineOptions from "unplugin-vue-define-options/vite";
+import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
+import { codeInspectorPlugin } from "code-inspector-plugin";
+import { vitePluginFakeServer } from "vite-plugin-fake-server";
 
-export function getPluginsList(command, VITE_LEGACY) {
-  const prodMock = true;
+export function getPluginsList(
+  VITE_CDN: boolean,
+  VITE_COMPRESSION: ViteCompression
+): PluginOption[] {
   const lifecycle = process.env.npm_lifecycle_event;
   return [
+    tailwindcss(),
     vue(),
-    // https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n
-    VueI18n({
-      runtimeOnly: true,
-      compositionOnly: true,
-      include: [resolve("locales/**")]
-    }),
     // jsx、tsx语法支持
     vueJsx(),
-    DefineOptions(),
-    // 线上环境删除console
-    removeConsole({ external: ["src/assets/iconfont/iconfont.js"] }),
+    VueI18nPlugin({
+      include: [pathResolve("../locales/**")]
+    }),
+    /**
+     * 在页面上按住组合键时，鼠标在页面移动即会在 DOM 上出现遮罩层并显示相关信息，点击一下将自动打开 IDE 并将光标定位到元素对应的代码位置
+     * Mac 默认组合键 Option + Shift
+     * Windows 默认组合键 Alt + Shift
+     * 更多用法看 https://inspector.fe-dev.cn/guide/start.html
+     */
+    codeInspectorPlugin({
+      bundler: "vite",
+      hideConsole: true
+    }),
     viteBuildInfo(),
-    // 自定义主题
-    themePreprocessorPlugin({
-      scss: {
-        multipleScopeVars: genScssMultipleScopeVars(),
-        // 在生产模式是否抽取独立的主题css文件，extract为true以下属性有效
-        extract: true,
-        // 会选取defaultScopeName对应的主题css文件在html添加link
-        themeLinkTagId: "head",
-        // "head"||"head-prepend" || "body" ||"body-prepend"
-        themeLinkTagInjectTo: "head",
-        // 是否对抽取的css文件内对应scopeName的权重类名移除
-        removeCssScopeName: false
-      }
+    /**
+     * 开发环境下移除非必要的vue-router动态路由警告No match found for location with path
+     * 非必要具体看 https://github.com/vuejs/router/issues/521 和 https://github.com/vuejs/router/issues/359
+     * vite-plugin-router-warn只在开发环境下启用，只处理vue-router文件并且只在服务启动或重启时运行一次，性能消耗可忽略不计
+     */
+    removeNoMatch(),
+    // mock支持
+    vitePluginFakeServer({
+      logger: false,
+      include: "mock",
+      infixName: false,
+      enableProd: true
     }),
     // svg组件化支持
     svgLoader(),
-    // ElementPlus({}),
-    // mock支持
-    viteMockServe({
-      mockPath: "mock",
-      localEnabled: command === "serve",
-      prodEnabled: command !== "serve" && prodMock,
-      injectCode: `
-          import { setupProdMockServer } from './mockProdServer';
-          setupProdMockServer();
-        `,
-      logger: false
+    // 自动按需加载图标
+    Icons({
+      compiler: "vue3",
+      scale: 1
     }),
-    // 是否为打包后的文件提供传统浏览器兼容性支持
-    VITE_LEGACY
-      ? legacy({
-          targets: ["ie >= 11"],
-          additionalLegacyPolyfills: ["regenerator-runtime/runtime"]
-        })
-      : null,
+    VITE_CDN ? cdn : null,
+    configCompressPlugin(VITE_COMPRESSION),
+    // 线上环境删除console
+    removeConsole({ external: ["src/assets/iconfont/iconfont.js"] }),
     // 打包分析
     lifecycle === "report"
       ? visualizer({ open: true, brotliSize: true, filename: "report.html" })
-      : null
+      : (null as any)
   ];
 }

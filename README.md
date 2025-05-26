@@ -1,11 +1,16 @@
 ## 基于vue3+TypeScript+vite 多个项项目集合成一个大型项目模板，共享公共包资源，使用Turborepo进行复杂拓扑关系的monorepo最优构建。
-## 多个项目集合包管理
+
+## 多个项目集合包管理（PC端+WAP移动端+ADMIN后台管理系统）
+
+- 后台管理系统集成`pure-admin国际化精简版` [https://github.com/pure-admin/pure-admin-thin](https://github.com/pure-admin/pure-admin-thin)
+- 后台管理系统也可以自行替换成其他的，只需删掉apps/admin目录下的所有文件，替换成自己的就行
 
 ## 快速开始
 
 ```js
 git clone https://github.com/akFace/turborepo-vue-template.git
 ```
+
 1. 安装 nodejs: https://nodejs.org/en/
 2. 安装 pnpm: `npm i pnpm -g`
 3. 安装依赖: `pnpm install`
@@ -42,7 +47,7 @@ turborepo-vue-template/
 │   │   │   ├── utils/
 │   │   │   └── views/
 │   │   └── types/
-│   ├── client --------PC端 
+│   ├── client --------PC端
 │   │   ├── public/
 │   │   └── src/
 │   │       ├── assets/
@@ -53,7 +58,7 @@ turborepo-vue-template/
 │   │       ├── store/
 │   │       ├── utils/
 │   │       └── views/
-│   └── client-mobile ------ wap移动端 
+│   └── client-mobile ------ wap移动端
 │       ├── public/
 │       └── src/
 │           ├── assets/

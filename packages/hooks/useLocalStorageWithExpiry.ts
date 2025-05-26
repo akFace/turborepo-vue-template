@@ -11,7 +11,7 @@ import {
 export function useExpiryLocalStorage<T extends { expiry: number; data: any }>(
   key: string,
   initialValue: MaybeRef<T>,
-  options?: StorageOptions<T>
+  options?: StorageOptions<T>,
 ): { key: string; ref: RemovableRef<T> } {
   const storage = useStorage(key, initialValue, new ExpiryLocalStorage(), {
     ...options,
@@ -30,8 +30,6 @@ export interface IUseLocalStorageWithExpiryOptions<T>
 
 class ExpiryLocalStorage implements StorageLike {
   getItem(key: string): string | null {
-    console.log('ExpiryLocalStorage getItem', key);
-
     const str = localStorage.getItem(key);
     if (!str && str?.startsWith('{')) return null;
     try {

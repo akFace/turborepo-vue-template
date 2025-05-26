@@ -1,7 +1,20 @@
-FROM node:16.13.2-alpine3.15 AS BUILD_IMAGE
-RUN mkdir /home/app
-COPY ./dist /home/app/dist
-RUN npm i @shixiyi/static-server -g
-ENV PORT=9001
-EXPOSE $PORT
-CMD sxy-static-server start -p $PORT -d /home/app/dist
+FROM node:20-alpine as build-stage
+
+WORKDIR /app
+RUN corepack enable
+RUN corepack prepare pnpm@latest --activate
+
+RUN npm config set registry https://registry.npmmirror.com
+
+COPY .npmrc package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
+
+COPY . .
+RUN pnpm build
+
+FROM nginx:stable-alpine as production-stage
+
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

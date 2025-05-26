@@ -1,49 +1,47 @@
-<h1>vue-pure-admin Lite Edition</h1>
+<h1>vue-pure-admin Lite Edition（i18n version）</h1>
 
-[![license](https://img.shields.io/github/license/xiaoxian521/vue-pure-admin.svg)](LICENSE)
+[![license](https://img.shields.io/github/license/pure-admin/vue-pure-admin.svg)](LICENSE)
 
 **English** | [中文](./README.md)
 
-## introduce
+## Introduce
 
-The lite version is based on the shelf extracted from [vue-pure-admin](https://github.com/xiaoxian521/vue-pure-admin), which contains the main functions and is more suitable for actual project development, the packaged size is only `3MB`, and will permanently sync the full version of the code
+The simplified version is based on the shelf extracted from [vue-pure-admin](https://github.com/pure-admin/vue-pure-admin), which contains main functions and is more suitable for actual project development. The packaged size is introduced globally [element-plus](https://element-plus.org) is still below `2.3MB`, and the full version of the code will be permanently synchronized. After enabling `brotli` compression and `cdn` to replace the local library mode, the package size is less than `350kb`
 
-## Supporting Video
+## `js` version
 
-- [Click Watch Tutorial](https://www.bilibili.com/video/BV1534y1S7HV)
-- [Click Watch UI Design](https://www.bilibili.com/video/BV17g411T7rq)
+[Click me to view js version](https://pure-admin.cn/pages/js/)
 
-## Docs
+## `max` version
 
-- [Click me to view the domestic documentation site](http://yiming_chang.gitee.io/pure-admin-doc)
-- [Click me to view foreign document site 1](https://xiaoxian521.github.io/pure-admin-doc)
-- [Click me to view foreign document site 2](https://pure-admin-doc.vercel.app)
+[Click me to view the max version](https://pure-admin.cn/pages/max/)
 
-## Usage
+## Supporting video
 
-### Installation dependencies
+[Click me to view UI design](https://www.bilibili.com/video/BV17g411T7rq)  
+[Click me to view the rapid development tutorial](https://www.bilibili.com/video/BV1kg411v7QT)
 
-pnpm install
+## Nanny-level documents
 
-### Install a package
+[Click me to view vue-pure-admin documentation](https://pure-admin.cn/)  
+[Click me to view @pureadmin/utils documentation](https://pure-admin-utils.netlify.app)
 
-pnpm add packageName
+## Quality service, software outsourcing, sponsorship support
 
-### Uninstall a package
+[Click me to view details](https://pure-admin.cn/pages/service/)
 
-pnpm remove packageName
+## Preview
 
-I think you should fork the project first to develop, so that you can pull the update synchronously when I update! ! !
+[Click me to view the preview station](https://pure-admin-thin.netlify.app/#/login)
 
-## Supporting video tutorial
+## Maintainer
 
-bilibili: https://www.bilibili.com/video/BV1534y1S7HV/
+[xiaoxian521](https://github.com/xiaoxian521)
 
 ## ⚠️ Attention
 
-- The Lite version does not accept any issues and prs. If you have any questions, please go to the full version https://github.com/xiaoxian521/vue-pure-admin/issues/new/choose to mention, thank you! ! !
-- Don't use the `delete-i18n` branch code, this branch is just for you to completely delete the internationalized references, it won't sync the code! ! ! [Completely remove the internationalization tutorial](https://www.bilibili.com/video/BV1Ru411B7k3/), please be sure to use the code from the `main` branch! ! !
+The Lite version does not accept any issues and prs. If you have any questions, please go to the full version [issues](https://github.com/pure-admin/vue-pure-admin/issues/new/choose) to mention, thank you!
 
 ## License
 
-In principle, no fees and copyrights are charged, and you can use it with confidence, but if you need secondary open source, please contact the author for permission!
+[MIT © 2020-present, pure-admin](./LICENSE)
