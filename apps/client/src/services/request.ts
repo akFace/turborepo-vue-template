@@ -31,25 +31,11 @@ let showErrorMsg = true;
 let useOptions: RequestOptions | null = null;
 
 const axiosRequest = axios.create({
-  // baseURL: 'https://livestream.inet',
   timeout: 15000,
   headers: {
     'Content-Type': 'application/json; charset=utf-8',
   },
 });
-
-// 1-中文 2-英文
-const langTypeMap: any = {
-  'zh-cn': '1',
-  'en-us': '2',
-};
-
-function getLangType() {
-  const { languageType } = useUrlSearchParams<{ languageType: string }>();
-  // const lang = localStorage.getItem('lang');
-  // return langTypeMap[lang || 'zh-cn'];
-  return languageType || '1';
-}
 
 // 添加请求拦截器
 axiosRequest.interceptors.request.use(
@@ -72,7 +58,6 @@ axiosRequest.interceptors.request.use(
       ...config,
       headers: {
         ...headers,
-        'Language-Type': getLangType(),
         'Cache-Control': 'no-cache',
       },
     };
@@ -82,7 +67,7 @@ axiosRequest.interceptors.request.use(
     console.log('error', error);
 
     return Promise.reject(error);
-  }
+  },
 );
 
 // 添加响应拦截器
@@ -103,7 +88,7 @@ axiosRequest.interceptors.response.use(
         '==================================================\n' +
           '请求出错了吖=======================================\n' +
           '==================================================',
-        `\n请求URL: ${response.config.url}\n请求方式：${response.config.method}`
+        `\n请求URL: ${response.config.url}\n请求方式：${response.config.method}`,
       );
       if (showErrorMsg) {
         showMessage({
@@ -129,12 +114,12 @@ axiosRequest.interceptors.response.use(
     // 对响应错误做点什么
     console.log('error', error);
     return Promise.reject(error);
-  }
+  },
 );
 
 export default function request<TResponseData>(
   payload: RequestFunctionParams,
-  options?: RequestOptions
+  options?: RequestOptions,
 ): Promise<TResponseData> {
   // ...
   // 基于 payload 获取接口信息，

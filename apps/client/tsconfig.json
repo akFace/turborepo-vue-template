@@ -15,9 +15,7 @@
     "lib": ["esnext", "dom"],
     "skipLibCheck": true,
     "types": [
-      "element-plus/global",
-      "../../packages/@types/TcPlayer",
-      "../../packages/@types/TIM"
+      "element-plus/global", "../../packages/@types/user"
     ],
     "baseUrl": ".",
     "paths": {

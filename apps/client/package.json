@@ -19,8 +19,6 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^1.1.4",
-    "@sentry/tracing": "^6.19.3",
-    "@sentry/vue": "^6.19.3",
     "@shixiyi/utils": "1.0.6",
     "@ssb/utils": "workspace:*",
     "@ssb/vue-hooks": "workspace:*",
@@ -31,18 +29,15 @@
     "dayjs": "^1.11.4",
     "element-plus": "^2.2.8",
     "element-resize-detector": "^1.2.4",
-    "hls.js": "^1.1.5",
     "js-md5": "^0.7.3",
     "lodash": "^4.17.21",
     "mitt": "^3.0.0",
     "pinia": "^2.0.13",
     "postcss-pxtorem": "^6.0.0",
     "tsignaling": "^0.10.0",
-    "umi-request": "^1.4.0",
     "vue": "^3.2.25",
     "vue-i18n": "9.1.9",
-    "vue-router": "^4.0.14",
-    "webrtc-adapter": "^8.1.1"
+    "vue-router": "^4.0.14"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^3.1.9",

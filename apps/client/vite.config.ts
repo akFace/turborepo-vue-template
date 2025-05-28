@@ -18,9 +18,8 @@ export default defineConfig({
     port: 8847,
     open: false,
     proxy: {
-      '/livefront/': {
-        // target: 'http://live-front-api.inet', // 开发内网环境
-        target: 'https://t.fruitmedia-hk.com', // 测试环境
+      '/api/': {
+        target: 'http://172.23.16.1:8700', // 测试环境
         changeOrigin: true,
       },
     },

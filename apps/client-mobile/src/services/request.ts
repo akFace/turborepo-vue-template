@@ -52,7 +52,7 @@ axiosRequest.interceptors.request.use(
       ...config,
       headers: {
         ...headers,
-        Authorization: localStorage.getItem('Authorization') || `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpZCI6MSwibmFtZSI6IuWwj-i0sSIsImF2YXRhciI6IiIsImN1c3RvbUlkIjoxLCJjdXN0b21OYW1lIjoi5aix5LmQ5YWs5Y-4IiwidGhpcmRVc2VySWQiOiIxMDAwIn0.21FFrx87DWEqa9X9y10nBFrJOMmldUZJXTfNW9--MpFexxqmMcYcAXis7IUdhyc_i_7pqNpUWi9qHGISs3dE_Q`,
+        Authorization: localStorage.getItem('Authorization'),
         'Language-Type': getLangType(),
         'Cache-Control': 'no-cache',
       },
@@ -61,7 +61,7 @@ axiosRequest.interceptors.request.use(
   function (error) {
     // 对请求错误做些什么
     return Promise.reject(error);
-  }
+  },
 );
 
 // 添加响应拦截器
@@ -78,7 +78,7 @@ axiosRequest.interceptors.response.use(
         '==================================================\n' +
           '请求出错了吖=======================================\n' +
           '==================================================',
-        `\n请求URL: ${response.config.url}\n请求方式：${response.config.method}`
+        `\n请求URL: ${response.config.url}\n请求方式：${response.config.method}`,
       );
       if (showErrorMsg) {
         showToast(msg || tip);
@@ -98,13 +98,13 @@ axiosRequest.interceptors.response.use(
     console.log('error', error);
     // 对响应错误做点什么
     return Promise.reject(error);
-  }
+  },
 );
 export default function request<TResponseData>(
   payload: RequestFunctionParams,
   options: RequestOptions = {
     server: 'prod',
-  }
+  },
 ): Promise<AxiosResponse<TResponseData>> {
   // ...
   // 基于 payload 获取接口信息，

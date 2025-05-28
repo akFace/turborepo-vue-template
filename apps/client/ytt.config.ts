@@ -1,8 +1,9 @@
 import { defineConfig } from 'yapi-to-typescript';
 
+// yapi配置，配置好之后在终端命令行执行 pnpm run fetch:api 自动拉取所有接口api
 export default defineConfig([
   {
-    serverUrl: 'http://yapi.fruitmedia-hk.com/',
+    serverUrl: 'http://yapi.com/', // 替换成自己的yapi
     typesOnly: false,
     target: 'typescript',
     reactHooks: {
@@ -28,7 +29,7 @@ export default defineConfig([
               // 若生成的请求函数名有重复报错，可考虑将接口请求方式纳入生成条件，如:
 
               return changeCase.camelCase(
-                `${interfaceInfo.method}_${interfaceInfo.path}`
+                `${interfaceInfo.method}_${interfaceInfo.path}`,
               );
             },
           },

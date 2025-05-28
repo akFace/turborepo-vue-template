@@ -12,7 +12,7 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "skipLibCheck": true,
-    "types": ["../../packages/@types/TcPlayer", "../../packages/@types/TIM"],
+    "types": ["../../packages/@types/user"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
