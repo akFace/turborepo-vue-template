@@ -32,7 +32,10 @@ export default defineConfig({
   },
   css: {
     preprocessorOptions: {
-      // scss: {},
+      scss: {
+        api: 'modern-compiler',
+        silenceDeprecations: ['legacy-js-api'],
+      },
     },
   },
   plugins: [

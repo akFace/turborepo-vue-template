@@ -1,4 +1,5 @@
 # 提交指南
+
 > 禁止线上解决冲突
 
 ## 环境安装
@@ -14,14 +15,15 @@ npm i commitizen -g
 
 #### 长期分支(长期存在，不删除)
 
-- main
-- develop
-- test
-- pre
+- main 主分支
+- develop 开发分支
+- test 测试分支
+- pre 预发布
+- release 正式版
 
 #### 临时分支(开发完成之后删除)
 
-- 功能分支 `feature/xxx` 
+- 功能分支 `feature/xxx`
 - 修复分支 `fix/xxx`
 - 紧急修复分支 `hotfix/xxx`
 
@@ -44,6 +46,6 @@ npm i commitizen -g
 
 ```shell
 git cz
-# 或者 
+# 或者
 pnpm run cz
 ```

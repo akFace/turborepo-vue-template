@@ -9,12 +9,12 @@ import ElementPlus from 'element-plus';
 // 全局CSS
 import 'element-plus/theme-chalk/src/message.scss';
 import 'element-plus/theme-chalk/index.css';
-import './assets/css/animate.css';
-import './assets/css/base.scss';
-import '@/assets/css/reset.scss';
-import './assets/css/common.scss';
+// import './assets/css/animate.css';
+// import './assets/css/base.scss';
+// import '@/assets/css/reset.scss';
+// import './assets/css/common.scss';
 
-import './assets/css/team.scss';
+// import './assets/css/team.scss';
 
 const app = createApp(App);
 app.use(router);

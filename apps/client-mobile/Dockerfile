@@ -1,3 +1,4 @@
+# 废弃 
 FROM node:16.13.2-alpine3.15 AS BUILD_IMAGE
 RUN mkdir /home/app
 COPY ./dist /home/app/dist

@@ -15,7 +15,7 @@ git clone https://github.com/akFace/turborepo-vue-template.git
 2. 安装 pnpm: `npm i pnpm -g`
 3. 安装依赖: `pnpm install`
 4. 运行项目(运行所有项目): `pnpm run dev`
-5. 构建项目资源: `pnpm run build`
+5. 构建项目资源（正式）: `pnpm run build`
 6. 单独本地运行某一个应用(构建同理)： `pnpm run dev:wap` 、`pnpm run dev:pc` 、`pnpm run dev:admin`
 
 ## 目录结构说明

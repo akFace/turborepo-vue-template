@@ -52,6 +52,7 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         api: 'modern-compiler',
+        silenceDeprecations: ['legacy-js-api'],
         charset: false,
         // 全局样式变量
         additionalData: '@use "./src/assets/css/variables.scss";',
